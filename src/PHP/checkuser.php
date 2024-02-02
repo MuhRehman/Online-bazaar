@@ -5,7 +5,7 @@
     header("Access-Control-Allow-Methods: GET, POST");
     header("Access-Control-Allow-Headers: Content-Type");
  
-    $conn = new mysqli("localhost", "root", "", "reactjsdb");
+    $conn = new mysqli("localhost", "root", "", "bazaar_db");
     if(mysqli_connect_error()){
         echo mysqli_connect_error();
         exit();

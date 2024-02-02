@@ -5,12 +5,13 @@
     header("Access-Control-Allow-Methods: GET, POST");
     header("Access-Control-Allow-Headers: Content-Type");
  
-    $conn = new mysqli("localhost", "root", "", "reactjsdb");
-    if(mysqli_connect_error()){
-        echo mysqli_connect_error();
+    $mysqli = new mysqli("localhost", "root", "", "bazaar_db");
+    if ($mysqli -> connect_errno) {
+        echo "Failed to connect to MySQL: " . $mysqli -> connect_error;
         exit();
     }
     else{
+        
         $eData = file_get_contents("php://input");
         $dData = json_decode($eData, true);
  
