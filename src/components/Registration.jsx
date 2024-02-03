@@ -180,7 +180,9 @@ const Registration = () => {
     return (
     
         <>
-        <section className="vh-100 bg-image" style={{backgroundImage: 'url("https://images.unsplash.com/photo-1495195129352-aeb325a55b65")'}}>
+        <section className="vh-100 bg-image" 
+        // style={{backgroundImage: 'url("https://images.unsplash.com/photo-1495195129352-aeb325a55b65")'}}
+        >
           <div className="mask d-flex align-items-center h-100 gradient-custom-3">
             <div className="container h-100">
               <div className="row d-flex justify-content-center align-items-center h-100">
@@ -247,14 +249,16 @@ const Registration = () => {
                           </label>
                         </div>
                         <div className="d-flex justify-content-center">
-                          <input 
+                          {/* <input 
                                 type="submit"
                                 defaultValue="Submit"
                                 className="btn btn-success btn-block btn-lg gradient-custom-4 text-body"
                                 onClick={handleSubmit}
-                            />
+                            /> */}
+                            <button type="button"  onClick={handleSubmit} class="btn btn-primary">Submit</button>
                         </div>
-                        <p className="text-center text-muted mt-5 mb-0">Have already an account? <a href="#!" className="fw-bold text-body"><u>Login here</u></a></p>
+                        <p className="text-center text-muted mt-5 mb-0">Have already an account? 
+                        <a href="#!" className="fw-bold text-body"><u>Login here</u></a></p>
                     </div>
                   </div>
                 </div>

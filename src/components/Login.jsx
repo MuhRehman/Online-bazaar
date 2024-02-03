@@ -5,7 +5,7 @@ export default function Login() {
 
 
     <>
-        <section className="vh-100 bg-image" style={{backgroundImage: 'url("https://images.unsplash.com/photo-1495195129352-aeb325a55b65")'}}>
+        <section className="vh-100 bg-image" >
           <div className="mask d-flex align-items-center h-100 gradient-custom-3">
             <div className="container h-100">
               <div className="row d-flex justify-content-center align-items-center h-100">
@@ -33,6 +33,7 @@ export default function Login() {
                             />
                         </div>
                         <div className="form-outline mb-4">
+                            <label className="form-label">Password</label>
                           <input 
                                 type="password"
                                 name="pass1"
@@ -41,16 +42,16 @@ export default function Login() {
                                 // onChange={(e) => handleInputChange(e, "pass1")}
                                // onBlur={checkPassword}
                             />
-                          <label className="form-label">Password</label>
                         </div>
                     
                         <div className="d-flex justify-content-center">
-                          <input 
+                          {/* <input 
                                 type="submit"
                                 defaultValue="Submit"
                                 className="btn btn-success btn-block btn-lg gradient-custom-4 text-body"
                                 // onClick={handleSubmit}
-                            />
+                            /> */}
+                            <button type="button"   class="btn btn-primary pr-4">Submit</button>
                         </div>
 
                     </div>
