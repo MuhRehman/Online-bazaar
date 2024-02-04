@@ -69,6 +69,7 @@ const Registration = () => {
             
             // var url = "http://localhost/devtest/reactjs/registration.php";
             var url = "http://localhost/backend/registration.php";
+            // var url = "https://api.example.com/items";
      
             var headers = {
                 "Accept": "application/json",
@@ -98,18 +99,28 @@ const Registration = () => {
             // });
 
 
-            fetch(url, {
-                method: "POST",
-                headers: headers,
-                body: JSON.stringify(Data)
-             })
-            .then((res) => res.json())
-            .then((data) => {
-              // console.log( JSON.stringify(data, null, 2));
-              alert(data);
-              console.log(data[0].result);
-            })
-            .catch((error) => console.log(error));
+            // fetch(url, {
+            //     method: "POST",
+            //     headers: headers,
+            //     body: JSON.stringify(Data)
+            //  })
+            // .then((res) => res.json())
+            // .then((data) => {
+            //   // console.log( JSON.stringify(data, null, 2));
+            //   alert(" yes enter ");
+            //   alert(data);
+            //   console.log(data[0].result);
+            // })
+            // .catch((error) => console.log(error));
+
+            fetch(url)
+      .then(response => response.json() )
+      .then(json =>  {
+        console.log(json)
+        setMsg(json.title)
+      }
+    
+      );
             
             setUser("");
             setEmail("");
@@ -124,50 +135,50 @@ const Registration = () => {
         }
     }
  
-    // function checkUser(){
-    //     alert("Dddd");
-    //     var url = "http://localhost/devtest/reactjs/checkuser.php";
-    //     var headers = {
-    //         "Accept": "application/json",
-    //         "Content-Type": "application/json"
-    //     };
-    //     var Data = {
-    //         user: user
-    //     }
-    //     fetch(url, {
-    //         method: "POST",
-    //         headers: headers,
-    //         body: JSON.stringify(Data)
-    //     }).then((response) => response.json())
-    //     .then((response) => {
-    //         setError(response[0].result);
-    //     }).catch((err) =>{
-    //         setError(err);
-    //         console.log(err);
-    //     });
-    // }
+    function checkUser(){
+        alert("Dddd");
+        var url = "http://localhost/backend/checkuser.php";
+        var headers = {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        };
+        var Data = {
+            user: user
+        }
+        fetch(url, {
+            method: "POST",
+            headers: headers,
+            body: JSON.stringify(Data)
+        }).then((response) => response.json())
+        .then((response) => {
+            setError(response[0].result);
+        }).catch((err) =>{
+            setError(err);
+            console.log(err);
+        });
+    }
  
-    // function checkEmail(){
-    //     var url = "http://localhost/devtest/reactjs/checkemail.php";
-    //     var headers = {
-    //         "Accept": "application/json",
-    //         "Content-Type": "application/json"
-    //     };
-    //     var Data = {
-    //         email: email
-    //     }
-    //     fetch(url, {
-    //         method: "POST",
-    //         headers: headers,
-    //         body: JSON.stringify(Data)
-    //     }).then((response) => response.json())
-    //     .then((response) => {
-    //         setError(response[0].result);
-    //     }).catch((err) =>{
-    //         setError(err);
-    //         console.log(err);
-    //     });
-    // }
+    function checkEmail(){
+        var url = "http://localhost/backend/checkemail.php";
+        var headers = {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        };
+        var Data = {
+            email: email
+        }
+        fetch(url, {
+            method: "POST",
+            headers: headers,
+            body: JSON.stringify(Data)
+        }).then((response) => response.json())
+        .then((response) => {
+            setError(response[0].result);
+        }).catch((err) =>{
+            setError(err);
+            console.log(err);
+        });
+    }
  
     // function checkPassword(){
     //     if(pass1.length < 8){
@@ -191,11 +202,11 @@ const Registration = () => {
                     <div className="card-body p-5">
                       <h2 className="text-uppercase text-center mb-5">Create an account</h2>
                       <p>
-                          {/* {
+                          {
                               msg !== "" ?
                               <span className="success">{msg}</span> :
                               <span className="error">{error}</span>
-                          } */}
+                          }
                       </p>
                         <div className="form-outline mb-4">
                         <label className="form-label">Your User Name</label>
@@ -211,6 +222,7 @@ const Registration = () => {
                           
                         </div>
                         <div className="form-outline mb-4">
+                          <label className="form-label">Your Email</label>
                           <input 
                                 type="email"
                                 name="email"
@@ -219,9 +231,9 @@ const Registration = () => {
                                 onChange={(e) => handleInputChange(e, "email")}
                                // onBlur={checkEmail}
                             />
-                          <label className="form-label">Your Email</label>
                         </div>
                         <div className="form-outline mb-4">
+                          <label className="form-label">Password</label>
                           <input 
                                 type="password"
                                 name="pass1"
@@ -230,9 +242,9 @@ const Registration = () => {
                                 onChange={(e) => handleInputChange(e, "pass1")}
                                // onBlur={checkPassword}
                             />
-                          <label className="form-label">Password</label>
                         </div>
                         <div className="form-outline mb-4">
+                          <label className="form-label">Repeat your password</label>
                           <input 
                                 type="password"
                                 name="pass2"
@@ -240,7 +252,6 @@ const Registration = () => {
                                 value={pass2}
                                 onChange={(e) => handleInputChange(e, "pass2")}
                             />
-                          <label className="form-label">Repeat your password</label>
                         </div>
                         <div className="form-check d-flex justify-content-center mb-5">
                           <input className="form-check-input me-2" type="checkbox" defaultValue id="form2Example3cg" />

@@ -28,7 +28,10 @@ function App() {
            <Link to="/login" className="fw-bolder">Login</Link>
          </li>
          <li>
-           <Link to="/productinfo" className="fw-bolder">Product Info</Link>
+           <Link to="/productinfo" className="fw-bolder">Add Product Info</Link>
+         </li>
+         <li>
+           <Link to="/searchproduct" className="fw-bolder">Search Product</Link>
          </li>
        </ul>
       <Routes>
