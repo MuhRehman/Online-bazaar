@@ -113,7 +113,11 @@ const Registration = () => {
             // })
             // .catch((error) => console.log(error));
 
-            fetch(url)
+            fetch(url,{
+                  method: "POST",
+                  headers: headers,
+                  // body: JSON.stringify(Data)
+                })
       .then(response => response.json() )
       .then(json =>  {
         console.log(json)

@@ -2,6 +2,7 @@ import Registration from "./components/Registration.jsx";
 import './App.css';
 import Login from "./components/Login.jsx";
 import ProductInfo from "./pages/ProductInfo.jsx";
+import Searchproduct from "./pages/Searchproduct.jsx";
 
 
 import {
@@ -10,6 +11,7 @@ import {
   Route,
   Link
 } from "react-router-dom";
+
 
 function App() {
   return (
@@ -38,6 +40,7 @@ function App() {
       <Route path='/registration' element={        <Registration/>} />
       <Route path='/login' element={ <Login />} />
       <Route path='/productinfo' element={ <ProductInfo />} />
+      <Route path='/searchproduct' element={ <Searchproduct />} />
     
       </Routes>
       </Router>
