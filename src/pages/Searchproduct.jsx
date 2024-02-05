@@ -390,7 +390,7 @@ export default function Searchproduct() {
      <input
         type="search"
         className='form-control'
-        placeholder="Search..."
+        placeholder="Search by name ..."
         onChange={e => setSearch(e.target.value)}
         />
         </div>
@@ -411,16 +411,25 @@ export default function Searchproduct() {
  
         </div>
 
-
-      {filteredList(users, category, search).map(user => (
-        <div key={user.id}>
-          {user.name} : {user.category}
-        </div>
-      ))}
+    
     </div>
 
     <div className="render-area">
-
+    <div className="row mt-4">
+      {filteredList(users, category, search).map(user => (
+        <div className='card col-3 m-3'>
+        <div key={user.id}>
+            <img src="https://vangogh.teespring.com/v3/image/-OpCH5guL7iRy6xu4D7E7xWz9K8/480/560.jpg" alt="" />
+               <p>{user.email } </p>
+               <p>{user.imgss}</p>
+           <h3>{user.name} </h3>
+           <h3>{user.username} </h3>
+           <p>  Cat:- {user.category} </p>
+           <p>  Cate:- {user.company.name} </p>
+        </div>
+        </div>
+      ))}
+    </div>
     {/* {productlist.map((productItem, index) => (
             <div key={index}>
               <h2>{productItem.name}</h2>

@@ -81,19 +81,26 @@ const Registration = () => {
                 pass: pass2
             }
           
-       
+       alert("Sss");
 
             fetch(url, {
                 method: "POST",
                 headers: headers,
                 body: JSON.stringify(Data)
-            }).then((response) => response.json())
+            })
+            .then((response) => response.json())
             .then((response) => {
                 alert("post");
+                
+                // debugger
+
                 console.log(response[0].result);
                 setMsg(response[0].result);
             }).catch((err) =>{
               alert("not");
+                
+            //   debugger
+
                 setError(err);
                 console.log(err);
             });
