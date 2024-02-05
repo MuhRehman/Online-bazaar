@@ -83,20 +83,20 @@ const Registration = () => {
           
        
 
-            // fetch(url, {
-            //     method: "POST",
-            //     headers: headers,
-            //     body: JSON.stringify(Data)
-            // }).then((response) => response.json())
-            // .then((response) => {
-            //     alert("post");
-            //     console.log(response[0].result);
-            //     setMsg(response[0].result);
-            // }).catch((err) =>{
-            //   alert("not");
-            //     setError(err);
-            //     console.log(err);
-            // });
+            fetch(url, {
+                method: "POST",
+                headers: headers,
+                body: JSON.stringify(Data)
+            }).then((response) => response.json())
+            .then((response) => {
+                alert("post");
+                console.log(response[0].result);
+                setMsg(response[0].result);
+            }).catch((err) =>{
+              alert("not");
+                setError(err);
+                console.log(err);
+            });
 
 
             // fetch(url, {
@@ -113,18 +113,18 @@ const Registration = () => {
             // })
             // .catch((error) => console.log(error));
 
-            fetch(url,{
-                  method: "POST",
-                  headers: headers,
-                  // body: JSON.stringify(Data)
-                })
-      .then(response => response.json() )
-      .then(json =>  {
-        console.log(json)
-        setMsg(json.title)
-      }
+      //       fetch(url,{
+      //             method: "POST",
+      //             headers: headers,
+      //             // body: JSON.stringify(Data)
+      //           })
+      // .then(response => response.json() )
+      // .then(json =>  {
+      //   console.log(json)
+      //   setMsg(json.title)
+      // }
     
-      );
+      // );
             
             setUser("");
             setEmail("");
