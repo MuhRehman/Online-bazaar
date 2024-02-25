@@ -81,7 +81,7 @@ const Registration = () => {
                 pass: pass2
             }
           
-       alert("Sss");
+    
 
             fetch(url, {
                 method: "POST",

@@ -1,12 +1,15 @@
 import React , { useState } from 'react'
 
 
+import { useHistory } from 'react-router-dom';
+
 export default function Login() {
 
     const [email, setEmail] = useState("");
     const [pass1, setPass1] = useState("");
     const [error, setError] = useState("");
-
+    // let history = useHistory();
+    
     const handleInputChange = (e, type) => {
       
         switch(type){
@@ -32,13 +35,8 @@ export default function Login() {
         }
     }
     function handleLoginSubmit(){
-        
-       
-
-        
-
-        
-        if( email != "" && pass1 != ""){
+                   
+        if( email !== "" && pass1 !== ""){
             var url = "http://localhost/backend/checkuser.php";
             
             var headers = {
@@ -51,7 +49,7 @@ export default function Login() {
                 email: email,
                 pass: pass1
             };
-       
+
 
             fetch(url, {
                 method: "POST",
@@ -61,8 +59,13 @@ export default function Login() {
             .then((res) => res.json())
             .then((data) => {
               // console.log( JSON.stringify(data, null, 2));
-              alert("repsonse data 222");
-              console.log(data[0].result);
+              alert("post");
+                 console.log(data[0]);
+                 if (data[0] = "login") {
+                  alert("Yes, Login succeccfully.!")
+                  // history.push("/home");
+                 }
+              // console.log(data[0].result);
             })
             .catch((error) => console.log(error));
 
@@ -78,6 +81,7 @@ export default function Login() {
         // else{
         //     $result = "";
         // }
+
     }
     return (
 
@@ -106,9 +110,8 @@ export default function Login() {
                                 className="form-control form-control-lg"
                                 value={email}
                                 onChange={(e) => handleInputChange(e, "email")}
-                                // value={email}
-                                // onChange={(e) => handleInputChange(e, "email")}
-                               // onBlur={checkEmail}
+                    
+                                // onBlur={checkEmail}
                             />
                         </div>
                         <div className="form-outline mb-4">
@@ -119,9 +122,9 @@ export default function Login() {
                                 className="form-control form-control-lg"
                                 value={pass1}
                                 onChange={(e) => handleInputChange(e, "pass1")}
-                                // value={pass1}
-                                // onChange={(e) => handleInputChange(e, "pass1")}
-                               // onBlur={checkPassword}
+                                value={pass1}
+                                 // onChange={(e) => handleInputChange(e, "pass1")}
+                               // onBlur={checkPassword} *
                             />
                         </div>
                     

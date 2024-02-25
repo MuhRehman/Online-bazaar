@@ -17,7 +17,7 @@ function App() {
   return (
     <div >
 
-<nav class="" data-bs-theme="dark">
+<nav class="" data-bs-theme="white">
 
     <Router>
  
