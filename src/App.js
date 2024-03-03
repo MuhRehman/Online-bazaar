@@ -3,6 +3,7 @@ import './App.css';
 import Login from "./components/Login.jsx";
 import ProductInfo from "./pages/ProductInfo.jsx";
 import Searchproduct from "./pages/Searchproduct.jsx";
+import Contacting from "./components/Contacting.jsx";
 
 
 import {
@@ -35,12 +36,16 @@ function App() {
          <li>
            <Link to="/searchproduct" className="fw-bolder">Search Product</Link>
          </li>
+         <li>
+           <Link to="/contacts" className="fw-bolder">Contacting</Link>
+         </li>
        </ul>
       <Routes>
       <Route path='/registration' element={        <Registration/>} />
       <Route path='/login' element={ <Login />} />
       <Route path='/productinfo' element={ <ProductInfo />} />
       <Route path='/searchproduct' element={ <Searchproduct />} />
+      <Route path='/contacts' element={ <Contacting />} />
     
       </Routes>
       </Router>

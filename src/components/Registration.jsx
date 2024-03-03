@@ -1,11 +1,12 @@
 
-import React, { useState ,useEffect} from "react";
-
+import React, { useState ,useEffect , useRef} from "react";
+// import React, {  } from 'react';
+import emailjs from '@emailjs/browser';
  
 const Registration = () => {
     
     const [user, setUser] = useState("");
-    const [email, setEmail] = useState("");
+    const [user_email, setEmail] = useState("");
     const [pass1, setPass1] = useState("");
     const [pass2, setPass2] = useState("");
     const [error, setError] = useState("");
@@ -30,7 +31,7 @@ const Registration = () => {
                     setError("Username has left blank!");
                 }
                 break;
-            case "email":
+            case "user_email":
                 setError("");
                 setEmail(e.target.value);
                 if(e.target.value === ""){
@@ -65,7 +66,7 @@ const Registration = () => {
         
   
 
-        if(user !== "" && email !== "" && pass1 !== "" && pass2 !== ""){
+        if(user !== "" && user_email !== "" && pass1 !== "" && pass2 !== ""){
             
             // var url = "http://localhost/devtest/reactjs/registration.php";
             var url = "http://localhost/backend/registration.php";
@@ -77,7 +78,7 @@ const Registration = () => {
             };
             var Data = {
                 user: user,
-                email: email,
+                email: user_email,
                 pass: pass2
             }
           
@@ -90,7 +91,7 @@ const Registration = () => {
             })
             .then((response) => response.json())
             .then((response) => {
-                alert("post");
+                alert("Registered Successfully");
                 
                 // debugger
 
@@ -138,14 +139,39 @@ const Registration = () => {
             setPass1("");
             setPass2("");
 
-          
+            // sendEmailComfirm();
 
         }
         else{
             setError("All fields are required!");
         }
     }
- 
+   
+    const form = useRef();
+    
+    const sendEmail = (e) => {
+        e.preventDefault();
+    
+        emailjs
+          .sendForm('service_orn8qus', 'template_cvli2eu', form.current, {
+            publicKey: 'RVexvYjiVu510ZPTx',
+          })
+          .then(
+            () => {
+              console.log('SUCCESS!');
+              alert("Confirmation email Send SUCCESS!");
+            },
+            (error) => {
+              console.log('FAILED...', error.text);
+            },
+          );
+          handleSubmit()
+      };
+
+    // function sendEmailComfirm(){
+
+
+    // }
     function checkUser(){
         alert("Dddd");
         var url = "http://localhost/backend/checkuser.php";
@@ -219,9 +245,19 @@ const Registration = () => {
                               <span className="error">{error}</span>
                           }
                       </p>
+
+                      <form ref={form} onSubmit={sendEmail}>
+      {/* <label>Name</label>
+      <input type="text" name="user_name" />
+      <label>Email</label>
+      <input type="email" name="user_email" />
+      <label>Message</label>
+      <textarea name="message" />
+      <input type="submit" value="Send" /> */}
+ 
                         <div className="form-outline mb-4">
                         <label className="form-label">Your User Name</label>
-                        <h1>{user}</h1>
+                        {/* <h1>{user}</h1> */}
                           <input 
                               type="text"
                               name="user"
@@ -236,10 +272,11 @@ const Registration = () => {
                           <label className="form-label">Your Email</label>
                           <input 
                                 type="email"
-                                name="email"
+                                // name="email"
+                                name="user_email"
                                 className="form-control form-control-lg"
-                                value={email}
-                                onChange={(e) => handleInputChange(e, "email")}
+                                value={user_email}
+                                onChange={(e) => handleInputChange(e, "user_email")}
                                // onBlur={checkEmail}
                             />
                         </div>
@@ -277,8 +314,10 @@ const Registration = () => {
                                 className="btn btn-success btn-block btn-lg gradient-custom-4 text-body"
                                 onClick={handleSubmit}
                             /> */}
-                            <button type="button"  onClick={handleSubmit} class="btn btn-primary">Submit</button>
+                            {/* <button type="button"  onClick={handleSubmit} class="btn btn-primary">Submit</button> */}
                         </div>
+                        <input type="submit" value="Send" />
+                        </form>
                         <p className="text-center text-muted mt-5 mb-0">Have already an account? 
                         <a href="#!" className="fw-bold text-body"><u>Login here</u></a></p>
                     </div>
