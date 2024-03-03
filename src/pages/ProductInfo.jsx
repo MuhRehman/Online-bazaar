@@ -43,7 +43,7 @@ export default function Login() {
               break;
           case "productmodel":
               setError("");
-              setProductPrice(e.target.value);
+              setModelName(e.target.value);
               if(e.target.value === ""){
                   setError("Password has left blank!");
               }
@@ -76,7 +76,7 @@ export default function Login() {
         
   
 
-    if(productName !== "" && menufacturerName !== "" && modelName !== "" && productPrice !== ""  && productImg !== ""){
+    if(productName !== "" && menufacturerName !== "" && modelName !== "" && productPrice !== "" ){
         
         var url = "http://localhost/backend/addproductinfo.php";
  
@@ -86,7 +86,7 @@ export default function Login() {
         };
 
         var Data = {
-          
+
           productName: productName,
           menufacturerName: menufacturerName,
           modelName: modelName,
@@ -96,7 +96,12 @@ export default function Login() {
         }
       
 
+        
+        // alert(Data.productName);
 
+     console.log(Data.productName);
+   
+     alert("Sss");
         fetch(url, {
             method: "POST",
             headers: headers,
@@ -149,11 +154,11 @@ export default function Login() {
                     <div className="card-body p-5">
                       <h2 className="text-uppercase text-center mb-5">Enter  Product Information</h2>
                       <p>
-                          {
+                          {/* {
                               msg !== "" ?
                               <span className="success">{msg}</span> :
                               <span className="error">{error}</span>
-                          }
+                          } */}
                       </p>
                     
                       
@@ -174,7 +179,7 @@ export default function Login() {
                                 type="text"
                                 name="menufacturername"
                                 className="form-control form-control-lg"
-                                value={modelName}
+                                value={menufacturerName}
                                 onChange={(e) => handleInputChange(e, "menufacturername")}
                                // onBlur={checkPassword}
                             />
@@ -185,7 +190,7 @@ export default function Login() {
                                 type="text"
                                 name="productmodel"
                                 className="form-control form-control-lg"
-                                value={productPrice}
+                                value={modelName}
                                 onChange={(e) => handleInputChange(e, "productmodel")}
                                // onBlur={checkPassword}
                             />
@@ -202,12 +207,12 @@ export default function Login() {
                             />
                         </div>
                         <div className="form-outline mb-4">
-                            <label className="form-label">Product Img</label>
+                            <label className="form-label">Product Img 11</label>
                           <input 
-                                type="file"
+                                type="text"
                                 name="productimg"
                                 className="form-control form-control-lg"
-                                value={productImg}
+                                value={productImg}  
                                 onChange={(e) => handleInputChange(e, "productimg")}
                                // onBlur={checkEmail}
                             />

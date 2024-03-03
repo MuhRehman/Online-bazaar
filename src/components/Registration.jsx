@@ -169,27 +169,27 @@ const Registration = () => {
         });
     }
  
-    function checkEmail(){
-        var url = "http://localhost/backend/checkemail.php";
-        var headers = {
-            "Accept": "application/json",
-            "Content-Type": "application/json"
-        };
-        var Data = {
-            email: email
-        }
-        fetch(url, {
-            method: "POST",
-            headers: headers,
-            body: JSON.stringify(Data)
-        }).then((response) => response.json())
-        .then((response) => {
-            setError(response[0].result);
-        }).catch((err) =>{
-            setError(err);
-            console.log(err);
-        });
-    }
+    // function checkEmail(){
+    //     var url = "http://localhost/backend/checkemail.php";
+    //     var headers = {
+    //         "Accept": "application/json",
+    //         "Content-Type": "application/json"
+    //     };
+    //     var Data = {
+    //         email: email
+    //     }
+    //     fetch(url, {
+    //         method: "POST",
+    //         headers: headers,
+    //         body: JSON.stringify(Data)
+    //     }).then((response) => response.json())
+    //     .then((response) => {
+    //         setError(response[0].result);
+    //     }).catch((err) =>{
+    //         setError(err);
+    //         console.log(err);
+    //     });
+    // }
  
     // function checkPassword(){
     //     if(pass1.length < 8){
@@ -203,7 +203,7 @@ const Registration = () => {
     
         <>
         <section className="vh-100 bg-image" 
-        // style={{backgroundImage: 'url("https://images.unsplash.com/photo-1495195129352-aeb325a55b65")'}}
+        style={{backgroundImage: 'url("https://images.unsplash.com/photo-1495195129352-aeb325a55b65")'}}
         >
           <div className="mask d-flex align-items-center h-100 gradient-custom-3">
             <div className="container h-100">
