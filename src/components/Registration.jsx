@@ -2,6 +2,8 @@
 import React, { useState ,useEffect , useRef} from "react";
 // import React, {  } from 'react';
 import emailjs from '@emailjs/browser';
+import { useNavigate } from "react-router-dom";
+
  
 const Registration = () => {
     
@@ -12,13 +14,17 @@ const Registration = () => {
     const [error, setError] = useState("");
     const [msg, setMsg] = useState("");
 
-
+    const navigate = useNavigate();
     useEffect(() => {
         setTimeout(function(){
             setMsg("");
         }, 15000);
     }, [msg]);
  
+    const handleClickSS = () => {
+      navigate("/login");
+  }
+
     const handleInputChange = (e, type) => {
       
         switch(type){
@@ -60,13 +66,8 @@ const Registration = () => {
     }
  
     function handleSubmit(){
-
-
-       
-        
-  
-
-        if(user !== "" && user_email !== "" && pass1 !== "" && pass2 !== ""){
+      
+      if(user !== "" && user_email !== "" && pass1 !== "" && pass2 !== ""){
             
             // var url = "http://localhost/devtest/reactjs/registration.php";
             var url = "http://localhost/backend/registration.php";
@@ -91,8 +92,9 @@ const Registration = () => {
             })
             .then((response) => response.json())
             .then((response) => {
+              
                 alert("Registered Successfully");
-                
+                navigate("/login");
                 // debugger
 
                 console.log(response[0].result);
@@ -151,7 +153,7 @@ const Registration = () => {
     
     const sendEmail = (e) => {
         e.preventDefault();
-    
+       console.log(  " String  Form " + form.current);
         emailjs
           .sendForm('service_orn8qus', 'template_cvli2eu', form.current, {
             publicKey: 'RVexvYjiVu510ZPTx',
@@ -237,6 +239,7 @@ const Registration = () => {
                 <div className="col-12 col-md-9 col-lg-7 col-xl-6">
                   <div className="card" style={{borderRadius: 15}}>
                     <div className="card-body p-5">
+                    
                       <h2 className="text-uppercase text-center mb-5">Create an account</h2>
                       <p>
                           {
@@ -246,14 +249,6 @@ const Registration = () => {
                           }
                       </p>
 
-                      <form ref={form} onSubmit={sendEmail}>
-      {/* <label>Name</label>
-      <input type="text" name="user_name" />
-      <label>Email</label>
-      <input type="email" name="user_email" />
-      <label>Message</label>
-      <textarea name="message" />
-      <input type="submit" value="Send" /> */}
  
                         <div className="form-outline mb-4">
                         <label className="form-label">Your User Name</label>
@@ -314,10 +309,10 @@ const Registration = () => {
                                 className="btn btn-success btn-block btn-lg gradient-custom-4 text-body"
                                 onClick={handleSubmit}
                             /> */}
-                            {/* <button type="button"  onClick={handleSubmit} class="btn btn-primary">Submit</button> */}
+                            <button type="button"  onClick={handleSubmit} class="btn btn-primary">Submit</button>
                         </div>
-                        <input type="submit" value="Send" />
-                        </form>
+                        {/* <input class="btn btn-primary" type="submit" value="Submit" /> */}
+                   
                         <p className="text-center text-muted mt-5 mb-0">Have already an account? 
                         <a href="#!" className="fw-bold text-body"><u>Login here</u></a></p>
                     </div>

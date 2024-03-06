@@ -1,5 +1,8 @@
-import React, { useState ,useEffect} from "react";
+import React, { useState ,useEffect , useRef} from "react";
 
+//For Image Upload
+// import ImageUploading from "react-images-uploading";
+import axios from 'axios';
 
 export default function Login() {
 
@@ -20,8 +23,120 @@ export default function Login() {
       }, 15000);
   }, [msg]);
 
+// -----------------------testing------------
+  const [selectedFile, setSelectedFile] = useState(null);
+
+	const [imageLink, setImageLink] = useState(null);
+
+	const [validationError, setValidationError] = useState(null);
+
+	const fileInputRef = useRef(null);
+
+	const handleFileChange = (event) => {
+
+		const file = event.target.files[0];
+		if(file)
+		{
+			const allowedExtension = ['.jpg', '.png'];
+			const selectedFileExtension = file.name.split('.').pop().toLowerCase();
+			if(allowedExtension.includes('.' + selectedFileExtension))
+			{
+				setSelectedFile(file);
+				setValidationError(null);
+			}
+			else
+			{
+				setSelectedFile(null);
+				setValidationError('Invalid file extension. Please select a file with .jpg or .png extension.');
+				fileInputRef.current.value = '';
+			}
+		}
+
+	};
+
+	const handleUpload = async(e) => {
+		if(selectedFile)
+		{
+    
+      e.preventDefault();
+    const formData = new FormData();
+    formData.append('file', selectedFile);
+ 
+    // try {
+    //   const response = await fetch('http://localhost/backend/fileupload.php', {
+    //     method: 'POST',
+    //     body: formData,
+    //   });
+ 
+    //   if (response.ok) {
+    //     console.log('File uploaded successfully');
+    //   } else {
+    //     console.error('File upload failed');
+    //   }
+    // } catch (error) {
+    //   console.error('Error uploading file:', error);
+    // }
+alert("sss");
+
+        fetch('http://localhost/backend/fileupload.php', {
+            method: "POST",
+            body: formData,
+        })
+        .then((response) => response.json())
+        .then((response) => {
+            alert("Registered Successfully");
+            
+            // debugger
+
+            console.log(response[0].result);
+            setMsg(response[0].result);
+        }).catch((err) =>{
+          alert("Not DB ");
+            
+        //   debugger
+
+            setError(err);
+            console.log(err);
+        });
 
 
+
+
+		}
+		else
+		{
+			setValidationError('Please select a file before uploading.');
+		}
+	};
+// -----------------------testing------------
+
+  const [file, setFile] = React.useState(null)
+    
+    const fileHandler = (e) => {
+        setFile(e.target.files[0])
+        
+    }
+
+  const  onChangess = (imageList) => {
+      // data for submit
+      
+      // Create an object of formData 
+      const formData = new FormData(); 
+      
+      // Update the formData object 
+      formData.append( 
+        "myFile", 
+        imageList[0].file, 
+        imageList[0].file.name
+      ); 
+     
+      // Details of the uploaded file 
+      console.log(imageList[0].file); 
+     
+      // Request made to the backend api 
+      // Send formData object to my php file for save in folder
+      axios.post("http://localhost/backend/reactimageupload.php", formData); 
+    }; 
   const handleInputChange = (e, type) => {
     
       switch(type){
@@ -138,6 +253,8 @@ export default function Login() {
     else{
         setError("All fields are required!");
     }
+
+    
 }
 
 
@@ -217,7 +334,12 @@ export default function Login() {
                                // onBlur={checkEmail}
                             />
                         </div>
-                    
+                      <div>
+                      <div>
+                          <img src={file? URL.createObjectURL(file) : null} alt={file? file.name : null}/>
+                          <input type="file" onChange={fileHandler} />
+                      </div>
+                      </div>
                         <div className="d-flex justify-content-center">
                           <input 
                                 type="submit"
@@ -233,6 +355,40 @@ export default function Login() {
               </div>
             </div>
           </div>
+          <div className="container">
+            <h1 className="mt-5 mb-5 text-center"><b>Upload File in React.js</b></h1>
+
+            <div className="card">
+                <div className="card-header">Upload File in React.js</div>
+                <div className="card-body">
+                    <div className="row">
+                        <div className="col col-2"><b>Select File</b></div>
+                        <div className="col col-3">
+                        	<input type="file" ref={fileInputRef} onChange={handleFileChange} />
+                        </div>
+                        <div className="col col-3">
+                        	<button className="btn btn-primary" onClick={handleUpload}>Upload</button>
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="col col-2">&nbsp;</div>
+                        <div className="col col-3">
+                            {validationError && (
+                            	<p className="text-danger">{validationError}</p>
+                            )}
+
+                            {imageLink && (
+                            	<div>
+                                    <p><b>Uploaded Image : </b></p>
+                                    <img src={imageLink} className="img-fluid img-thumbnail" />
+                                </div>
+                            )}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+          
         </section>
     </>
   )

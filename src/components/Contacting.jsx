@@ -7,6 +7,11 @@ export default  function  Contacting() {
   const sendEmail = (e) => {
     e.preventDefault();
 
+    const formData = new FormData(form.current);
+    for (let [name, value] of formData.entries()) { 
+      
+      console.log(name + ': ' + value);     
+    }
     emailjs
       .sendForm('service_orn8qus', 'template_cvli2eu', form.current, {
         publicKey: 'RVexvYjiVu510ZPTx',
@@ -14,6 +19,7 @@ export default  function  Contacting() {
       .then(
         () => {
           console.log('SUCCESS!');
+          alert("SUCCESS Sent!");
         },
         (error) => {
           console.log('FAILED...', error.text);
@@ -22,14 +28,8 @@ export default  function  Contacting() {
   };
 
   return (
-    <form ref={form} onSubmit={sendEmail}>
-      <label>Name</label>
-      <input type="text" name="user_name" />
-      <label>Email</label>
-      <input type="email" name="user_email" />
-      <label>Message</label>
-      <textarea name="message" />
-      <input type="submit" value="Send" />
-    </form>
+   <div>
+    
+   </div>
   );
 };
