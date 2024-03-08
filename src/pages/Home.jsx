@@ -2,6 +2,20 @@ import React from 'react'
 import { useNavigate } from "react-router-dom";
 import Login from "../components/Login";
 
+import  card1 from "./cardimg/Xiaomi Redmi 8 Original Global.jpg";
+import  card2 from "./cardimg/FotoJet-209-635x430.jpg";
+import  card3 from "./cardimg/PowerShot-SX240-HS_Fr.jpeg";
+import  card4 from "./cardimg/Sennhei.png";
+import  card5 from "./cardimg/apple-sport-gold-apple-watch.png";
+import  card6 from "./cardimg/d9bbb5b06b5e4555adf4ee89ce047b77.png";
+import  card7 from "./cardimg/t-shirt.jpg";
+import  card8 from "./cardimg/tshirts.jpg";
+import  logos1 from "./cardimg/onlinebazaar.png";
+import  logos11 from "./cardimg/brand/barn.jpg";
+import  logos12 from "./cardimg/brand/brand.jpg";
+import  logos13 from "./cardimg/brand/campaign.jpg";
+import  logos14 from "./cardimg/brand/rupixen.jpg";
+
 export default function Home() {
 
   const navigate = useNavigate()
@@ -19,8 +33,7 @@ export default function Home() {
 
 <div class="input-group">
    <a class="navbar-brand" href="#">
-     <img class="me-3 me-md-5" src="../../assets/onlinebazaar.png"/>
-   </a> 
+     <img class="me-3 me-md-5" style={{width: '40px'}} src={logos1} />  </a> 
 <input type="text" id="input-form" class="form-control" placeholder="Search" aria-label="Text input with dropdown button" />
 <button class="btn btn-outline-secondary dropdown-toggle " type="button" data-bs-toggle="dropdown" aria-expanded="false">All type</button>
 <button class="btn btn-primary d-none d-lg-block"><i class="fa-solid fa-magnifying-glass rounded d-none d-lg-block"></i></button>
@@ -108,7 +121,8 @@ export default function Home() {
        
        <div class="row g-3 d-flex justify-content-evenly">
    <div class="card"  style={{width: '18rem'}}>
-     <img class="img" src="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/1.jpg" width="100%" height="240px"></img>
+     <img class="img"   src={card2}
+     width="100%" height="240px"></img>
 <div class="card-body">
 
   <h5 class="card-title">$790.50</h5>
@@ -122,7 +136,7 @@ export default function Home() {
       
       
       <div class="card" style={{width: '18rem'}}>
-        <img src="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/2.jpg" width="100%" height="240px"></img>
+        <img src={card1} width="100%" height="240px"></img>
    
 <div class="card-body">
      
@@ -138,7 +152,7 @@ export default function Home() {
     
  
     <div class="card" style={{width: '18rem'}}>
-        <img src="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/3.jpg" width="100%" height="240px"></img>
+        <img src={card3} width="100%" height="240px"></img>
    
 <div class="card-body">
 
@@ -154,7 +168,7 @@ export default function Home() {
   
 
   <div class="card" style={{width: '18rem'}}>
-        <img src="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/4.jpg" width="100%" height="240px"></img>
+        <img src={card4} width="100%" height="240px"></img>
    
 <div class="card-body">
     
@@ -172,7 +186,7 @@ export default function Home() {
 
 
  <div class="card" style={{width: '18rem'}}>
-        <img src="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/5.jpg" width="100%" height="240px"></img>
+        <img src={card5} width="100%" height="240px"></img>
    
 <div class="card-body">
 
@@ -188,7 +202,7 @@ export default function Home() {
 
 
 <div class="card" style={{width: '18rem'}}>
-        <img src="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/6.jpg" width="100%" height="240px"></img>
+        <img src={card6} width="100%" height="240px"></img>
    
 <div class="card-body">
     
@@ -204,7 +218,7 @@ export default function Home() {
 
 
 <div class="card" style={{width: '18rem'}}>
-        <img src="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/7.jpg" width="100%" height="240px"></img>
+        <img src={card7} width="100%" height="240px"></img>
    
 <div class="card-body">
   
@@ -326,7 +340,7 @@ Best quality</h6>
  <div class="row mt-md-5">
    
    <div class="col-sm-6 col-md-6 col-lg-3">
-     <img class="bg rounded" src="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/posts/1.jpg" width="250" height="200"  />
+     <img class="bg rounded" src={logos12} width="250" height="200"  />
      <div class="mt-3">
        <a href="#"  class="fw-bold">How to promote brands</a>
        <p class="text-muted">When you enter into any new area of science, you almost reach</p>
@@ -334,7 +348,7 @@ Best quality</h6>
    </div>
    
     <div class="col-sm-6 col-md-6 col-lg-3">
-     <img class="bg rounded" src="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/posts/2.jpg" width="250" height="200"  />
+     <img class="bg rounded" src={logos14} width="250" height="200"  />
      <div class="mt-3">
        <a class="fw-bold">How we handle shipping</a>
        <p class="text-muted">When you enter into any new area of science, you almost reach</p>
@@ -342,7 +356,7 @@ Best quality</h6>
    </div>
    
     <div class="col-sm-6 col-md-6 col-lg-3">
-     <img class="bg rounded" src="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/posts/3.jpg" width="250" height="200"  />
+     <img class="bg rounded" src={logos13} width="250" height="200"  />
      <div class="mt-3">
        <a class="fw-bold">How to promote brands</a>
        <p class="text-muted">When you enter into any new area of science, you almost reach</p>
@@ -350,7 +364,7 @@ Best quality</h6>
    </div>
    
     <div class="col-sm-6 col-md-6 col-lg-3">
-     <img class="bg rounded" src="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/posts/4.jpg" width="250" height="200"  />
+     <img class="bg rounded" src={logos11} width="250" height="200"  />
      <div class="mt-3">
        <a class="fw-bold">Success story of sellers</a>
        <p class="text-muted">When you enter into any new area of science, you almost reach</p>
@@ -372,7 +386,7 @@ Best quality</h6>
   
   <div class="col-md-12 col-lg-3 mb-3">
  
-  <img src="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/logo.svg"></img>
+  <img src={logos1} style={{width: '6rem'}}></img>
   <p class="mt-4 text-muted">© 2018- 2021 Templatemount.
 All rights reserved.</p>
 

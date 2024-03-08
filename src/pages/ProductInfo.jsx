@@ -12,9 +12,10 @@ export default function Login() {
   const [menufacturerName, setMenufacturerName] = useState("");
   const [modelName, setModelName] = useState("");
   const [productPrice, setProductPrice] = useState("");
-  const [productImg, setProductImg] = useState("");
-  const [error, setError] = useState("");
-  const [msg, setMsg] = useState("");
+  const [productImgs, setProductImg] = useState("");
+  const [productimage, setProductimage] = useState("");
+  const [error, setError] = useState("Test");
+  const [msg, setMsg] = useState("Test");
 
 
   useEffect(() => {
@@ -76,7 +77,7 @@ export default function Login() {
     // } catch (error) {
     //   console.error('Error uploading file:', error);
     // }
-alert("sss");
+        alert("sss");
 
         fetch('http://localhost/backend/fileupload.php', {
             method: "POST",
@@ -90,14 +91,12 @@ alert("sss");
 
             console.log(response[0].result);
             setMsg(response[0].result);
-        }).catch((err) =>{
-          alert("Not DB ");
-            
-        //   debugger
-
-            setError(err);
-            console.log(err);
-        });
+            }).catch((err) =>{
+              alert("Not DB ");
+            //   debugger
+                setError(err);
+                console.log(err);
+            });
 
 
 
@@ -138,7 +137,8 @@ alert("sss");
       axios.post("http://localhost/backend/reactimageupload.php", formData); 
     }; 
   const handleInputChange = (e, type) => {
-    
+    // console.log(`Selected file - ${e.target.files[0].name}`);
+  
       switch(type){
        
           case "productname":
@@ -163,9 +163,10 @@ alert("sss");
                   setError("Password has left blank!");
               }
               break;
-          case "productImg":
+          case "productimage":
               setError("");
-              setProductImg(e.target.value);
+              setProductimage(e.target.files[0].name);
+              // setProductimage(e.target.value);
               if(e.target.value === ""){
                   setError("productImg has left blank!");
               }
@@ -191,7 +192,7 @@ alert("sss");
         
   
 
-    if(productName !== "" && menufacturerName !== "" && modelName !== "" && productPrice !== "" ){
+    if(productName !== "" && menufacturerName !== "" && modelName !== "" && productPrice !== ""  ){
         
         var url = "http://localhost/backend/addproductinfo.php";
  
@@ -206,7 +207,7 @@ alert("sss");
           menufacturerName: menufacturerName,
           modelName: modelName,
           productPrice: productPrice,
-          productImg: productImg
+          productImg: productimage
 
         }
       
@@ -216,22 +217,22 @@ alert("sss");
 
      console.log(Data.productName);
    
-     alert("Sss");
+  
         fetch(url, {
             method: "POST",
             headers: headers,
             body: JSON.stringify(Data)
         })
-        .then((response) => response.json())
+        // .then((response) => response.json())
         .then((response) => {
-            alert("post");
+            alert("post 111");
             
             // debugger
 
             console.log(response[0].result);
             setMsg(response[0].result);
         }).catch((err) =>{
-          alert("not");
+          alert("not 11");
             
         //   debugger
 
@@ -245,7 +246,7 @@ alert("sss");
         setMenufacturerName("");
         setModelName("");
         setProductPrice("");
-        setProductImg("");
+        setProductimage("");
 
       
 
@@ -271,11 +272,11 @@ alert("sss");
                     <div className="card-body p-5">
                       <h2 className="text-uppercase text-center mb-5">Enter  Product Information</h2>
                       <p>
-                          {/* {
+                          {
                               msg !== "" ?
                               <span className="success">{msg}</span> :
                               <span className="error">{error}</span>
-                          } */}
+                          }
                       </p>
                     
                       
@@ -324,15 +325,26 @@ alert("sss");
                             />
                         </div>
                         <div className="form-outline mb-4">
-                            <label className="form-label">Product Img 11</label>
+                            <label className="form-label">Product Image </label>
                           <input 
-                                type="text"
-                                name="productimg"
+                                type="file"
+                                name="productimage"
                                 className="form-control form-control-lg"
-                                value={productImg}  
-                                onChange={(e) => handleInputChange(e, "productimg")}
+                                value={productimage}  
+                                onChange={(e) => handleInputChange(e, "productimage")}
                                // onBlur={checkEmail}
                             />
+                        </div>
+                        <div className="form-outline mb-4">
+                            {/* <label className="form-label">Product Img 11</label> */}
+                          {/* <input  */}
+                                {/* // type="text"
+                                // name="productimg"
+                                // className="form-control form-control-lg"
+                                // value={productImgs}  
+                                // onChange={(e) => handleInputChange(e, "productimg")}
+                               // onBlur={checkEmail} */}
+                            {/* /> */}
                         </div>
                       <div>
                       <div>

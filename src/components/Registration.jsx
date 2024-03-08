@@ -268,7 +268,7 @@ const Registration = () => {
                         {/* <h1>{user}</h1> */}
                           <input 
                               type="text"
-                              name="user"
+                              name="username"
                               className="form-control form-control-lg"
                               value={user}
                               onChange={(e) => handleInputChange(e, "user")}
