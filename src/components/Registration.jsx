@@ -13,6 +13,7 @@ const Registration = () => {
     const [pass2, setPass2] = useState("");
     const [error, setError] = useState("");
     const [msg, setMsg] = useState("");
+    const [ spinner, setSpinner ] = useState(false);
 
     const navigate = useNavigate();
     useEffect(() => {
@@ -21,9 +22,7 @@ const Registration = () => {
         }, 15000);
     }, [msg]);
  
-    const handleClickSS = () => {
-      navigate("/login");
-  }
+
 
     const handleInputChange = (e, type) => {
       
@@ -66,11 +65,13 @@ const Registration = () => {
     }
  
     function handleSubmit(){
+      setSpinner(true);
       
       if(user !== "" && user_email !== "" && pass1 !== "" && pass2 !== ""){
             
             // var url = "http://localhost/devtest/reactjs/registration.php";
-            var url = "http://localhost/backend/registration.php";
+            var url = "http://localhost/backend/mailer/registration.php";
+            // var url = "http://localhost/backend/registration.php";
             // var url = "https://api.example.com/items";
      
             var headers = {
@@ -82,7 +83,8 @@ const Registration = () => {
                 email: user_email,
                 pass: pass2
             }
-          
+            
+            console.log('login data',Data);
     
 
             fetch(url, {
@@ -90,20 +92,20 @@ const Registration = () => {
                 headers: headers,
                 body: JSON.stringify(Data)
             })
-            .then((response) => response.json())
+            // .then((response) => response.json())
             .then((response) => {
-              
+                setSpinner(false);
                 alert("Registered Successfully");
                 navigate("/login");
                 // debugger
 
-                console.log(response[0].result);
-                setMsg(response[0].result);
+                console.log("response: ", response);
+                // setMsg(response[0].result);
             }).catch((err) =>{
-              alert("not");
-                
+              setSpinner(false);
+              alert("Not Insert HS");
             //   debugger
-
+            setSpinner(false);
                 setError(err);
                 console.log(err);
             });
@@ -227,9 +229,20 @@ const Registration = () => {
 
 
   
-    return (
-    
-        <>
+    if (spinner === true) {
+       return < > 
+           <div>
+        <div id="spinner" class="container">
+        <div class="loading"></div>
+        </div>
+        </div>
+          
+         </>;
+        } else {
+          return < > 
+          
+       
+       
         <section className="vh-100 bg-image" 
         style={{backgroundImage: 'url("https://images.unsplash.com/photo-1495195129352-aeb325a55b65")'}}
         >
@@ -322,8 +335,9 @@ const Registration = () => {
             </div>
           </div>
         </section>
-        </>
-    )
+  
+           </>;
+        }
   }
 
 

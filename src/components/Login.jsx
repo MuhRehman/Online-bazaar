@@ -1,13 +1,16 @@
 import React , { useState } from 'react'
 
 
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
+
 
 export default function Login() {
 
     const [email, setEmail] = useState("");
     const [pass1, setPass1] = useState("");
     const [error, setError] = useState("");
+    const [msg, setMsg] = useState("");
+    const navigate = useNavigate();
     // let history = useHistory();
     
     const handleInputChange = (e, type) => {
@@ -57,17 +60,24 @@ export default function Login() {
                 body: JSON.stringify(Data)
              })
             .then((res) => res.json())
-            .then((data) => {
+            .then((res) => {
               // console.log( JSON.stringify(data, null, 2));
               alert("post");
-                 console.log(data[0]);
-                 if (data[0] = "login") {
-                  alert("Yes, Login succeccfully.!")
-                  // history.push("/home");
+                //  console.log(data);
+                   console.log(res[0].result);
+                   if (res[0].result == "login") {
+                     setMsg(res[0].result);
+                     alert("Yes, Login succeccfully.!")
+                  navigate("/home");
+                 } else {
+                     setError(res[0].result);
                  }
               // console.log(data[0].result);
             })
-            .catch((error) => console.log(error));
+            .catch((error) => {
+              setError(error);
+              console.log(error)
+            });
 
         }
             // echo "Connected Not insert!";exit;
@@ -86,7 +96,9 @@ export default function Login() {
     return (
 
     <>
-        <section className="vh-100 bg-image" >
+        <section className="vh-100 bg-image"
+         style={{backgroundImage: 'url("https://images.unsplash.com/photo-1495195129352-aeb325a55b65")'}}
+        >
           <div className="mask d-flex align-items-center h-100 gradient-custom-3">
             <div className="container h-100">
               <div className="row d-flex justify-content-center align-items-center h-100">
@@ -95,11 +107,11 @@ export default function Login() {
                     <div className="card-body p-5">
                       <h2 className="text-uppercase text-center mb-5">Login</h2>
                       <p>
-                          {/* {
+                          {
                               msg !== "" ?
                               <span className="success">{msg}</span> :
                               <span className="error">{error}</span>
-                          } */}
+                          }
                       </p>
                     
                         <div className="form-outline mb-4">
@@ -122,7 +134,7 @@ export default function Login() {
                                 className="form-control form-control-lg"
                                 value={pass1}
                                 onChange={(e) => handleInputChange(e, "pass1")}
-                                value={pass1}
+                                // value={pass1}
                                  // onChange={(e) => handleInputChange(e, "pass1")}
                                // onBlur={checkPassword} *
                             />

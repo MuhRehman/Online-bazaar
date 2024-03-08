@@ -13,6 +13,7 @@ import {
   Link
 } from "react-router-dom";
 import ProductDetail from "./pages/ProductDetail.jsx";
+import Home from "./pages/Home.jsx";
 
 
 function App() {
@@ -43,6 +44,9 @@ function App() {
          <li>
            <Link to="/productdetail" className="fw-bolder">Product Detail</Link>
          </li>
+         <li>
+           <Link to="/home" className="fw-bolder">Home</Link>
+         </li>
        </ul>
       <Routes>
       <Route path='/registration' element={        <Registration/>} />
@@ -51,6 +55,7 @@ function App() {
       <Route path='/searchproduct' element={ <Searchproduct />} />
       <Route path='/contacts' element={ <Contacting />} />
       <Route path='/productdetail' element={ <ProductDetail />} />
+      <Route path='/home' element={ <Home />} />
     
       </Routes>
       </Router>
