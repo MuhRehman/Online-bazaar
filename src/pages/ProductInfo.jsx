@@ -14,6 +14,7 @@ export default function Login() {
   const [productPrice, setProductPrice] = useState("");
   const [productImgs, setProductImg] = useState("");
   const [productimage, setProductimage] = useState("");
+  const [productfilepath, setProductfileimage] = useState("");
   const [error, setError] = useState("Test");
   const [msg, setMsg] = useState("Test");
 
@@ -63,40 +64,41 @@ export default function Login() {
     const formData = new FormData();
     formData.append('file', selectedFile);
  
-    // try {
-    //   const response = await fetch('http://localhost/backend/fileupload.php', {
-    //     method: 'POST',
-    //     body: formData,
-    //   });
+    try {
+      const response = await fetch('http://localhost/backend/fileupload.php', {
+        method: 'POST',
+        body: formData,
+      });
  
-    //   if (response.ok) {
-    //     console.log('File uploaded successfully');
-    //   } else {
-    //     console.error('File upload failed');
-    //   }
-    // } catch (error) {
-    //   console.error('Error uploading file:', error);
-    // }
-        alert("sss");
+      if (response.ok) {
+        console.log('File uploaded successfully');
+      } else {
+        console.error('File upload failed');
+      }
+    } catch (error) {
+      console.error('Error uploading file:', error);
+    }
 
-        fetch('http://localhost/backend/fileupload.php', {
-            method: "POST",
-            body: formData,
-        })
-        .then((response) => response.json())
-        .then((response) => {
-            alert("Registered Successfully");
+        alert("Move to Upload Dir....!");
+
+        // fetch('http://localhost/backend/addproductinfo.php', {
+        //     method: "POST",
+        //     body: formData,
+        // })
+        // .then((response) => response.json())
+        // .then((response) => {
+        //     alert(" Successfully Upload");
             
-            // debugger
+        //     // debugger
 
-            console.log(response[0].result);
-            setMsg(response[0].result);
-            }).catch((err) =>{
-              alert("Not DB ");
-            //   debugger
-                setError(err);
-                console.log(err);
-            });
+        //     console.log(response[0].result);
+        //     setMsg(response[0].result);
+        //     }).catch((err) =>{
+        //       alert("Failed Upload.. ");
+        //     //   debugger
+        //         setError(err);
+        //         console.log(err);
+        //     });
 
 
 
@@ -108,7 +110,7 @@ export default function Login() {
 		}
 	};
 // -----------------------testing------------
-
+//  alert()
   const [file, setFile] = React.useState(null)
     
     const fileHandler = (e) => {
@@ -165,8 +167,8 @@ export default function Login() {
               break;
           case "productimage":
               setError("");
-              setProductimage(e.target.files[0].name);
-              // setProductimage(e.target.value);
+              setProductfileimage(e.target.files[0].name);
+              setProductimage(e.target.value);
               if(e.target.value === ""){
                   setError("productImg has left blank!");
               }
@@ -207,7 +209,8 @@ export default function Login() {
           menufacturerName: menufacturerName,
           modelName: modelName,
           productPrice: productPrice,
-          productImg: productimage
+          // productImg: productimage
+          productImg: productfilepath
 
         }
       
@@ -270,7 +273,7 @@ export default function Login() {
                 <div className="col-12 col-md-9 col-lg-7 col-xl-6">
                   <div className="card" style={{borderRadius: 15}}>
                     <div className="card-body p-5">
-                      <h2 className="text-uppercase text-center mb-5">Enter  Product Information</h2>
+                      <h2 className="text-uppercase text-center mb-5">Enter  Product Information 11 </h2>
                       <p>
                           {
                               msg !== "" ?
@@ -326,31 +329,36 @@ export default function Login() {
                         </div>
                         <div className="form-outline mb-4">
                             <label className="form-label">Product Image </label>
-                          <input 
+                          {/* <input 
                                 type="file"
                                 name="productimage"
                                 className="form-control form-control-lg"
                                 value={productimage}  
                                 onChange={(e) => handleInputChange(e, "productimage")}
                                // onBlur={checkEmail}
-                            />
+                            /> */}
+                            	{/* <input type="file"
+                                 name="productimage"
+                              className="form-control form-control-lg"
+                              ref={fileInputRef} onChange={handleFileChange} /> */}
                         </div>
                         <div className="form-outline mb-4">
                             {/* <label className="form-label">Product Img 11</label> */}
-                          {/* <input  */}
-                                {/* // type="text"
-                                // name="productimg"
-                                // className="form-control form-control-lg"
-                                // value={productImgs}  
-                                // onChange={(e) => handleInputChange(e, "productimg")}
-                               // onBlur={checkEmail} */}
-                            {/* /> */}
+                          <input 
+                                type="file"
+                                name="productimage"
+                                className="form-control form-control-lg"
+                                ref={fileInputRef}
+                                value={productimage}  
+                                onChange={(e) => handleInputChange(e, "productimage")}
+                              //  onBlur={checkEmail}
+                            /> 
                         </div>
                       <div>
-                      <div>
+                      {/* <div>
                           <img src={file? URL.createObjectURL(file) : null} alt={file? file.name : null}/>
                           <input type="file" onChange={fileHandler} />
-                      </div>
+                      </div> */}
                       </div>
                         <div className="d-flex justify-content-center">
                           <input 
@@ -371,7 +379,7 @@ export default function Login() {
             <h1 className="mt-5 mb-5 text-center"><b>Upload File in React.js</b></h1>
 
             <div className="card">
-                <div className="card-header">Upload File in React.js</div>
+             
                 <div className="card-body">
                     <div className="row">
                         <div className="col col-2"><b>Select File</b></div>
