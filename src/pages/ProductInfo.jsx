@@ -12,12 +12,13 @@ export default function Login() {
   const [menufacturerName, setMenufacturerName] = useState("");
   const [modelName, setModelName] = useState("");
   const [productPrice, setProductPrice] = useState("");
-  const [productImgs, setProductImg] = useState("");
+  const [productType, setProductType] = useState("");
+  // const [productImgs, setProductImg] = useState("");
   const [productimage, setProductimage] = useState("");
-  const [productfilepath, setProductfileimage] = useState("");
-  const [error, setError] = useState("Test");
-  const [msg, setMsg] = useState("Test");
-
+  // const [productfilepath, setProductfileimage] = useState("");
+  const [error, setError] = useState("");
+  const [msg, setMsg] = useState("");
+  const [ImagePerview, setImage] = useState("");
 
   useEffect(() => {
       setTimeout(function(){
@@ -35,7 +36,7 @@ export default function Login() {
 	const fileInputRef = useRef(null);
 
 	const handleFileChange = (event) => {
-
+    // alert("file move fun call..");
 		const file = event.target.files[0];
 		if(file)
 		{
@@ -53,8 +54,24 @@ export default function Login() {
 				fileInputRef.current.value = '';
 			}
 		}
-
+    readImage(event, setImage);
 	};
+
+  async function readImage(e, func) {
+    const file = e.target.files[0];
+    const reader = new FileReader();
+    console.log(file);
+    reader.onload = function(e) {
+      let binaryData = e.target.result;
+      let base64String = window.btoa(binaryData);
+      func(base64String);
+    };
+
+    let ImagePerview = reader.readAsBinaryString(file);
+    console.log(reader);
+
+    return ImagePerview;
+  }
 
 	const handleUpload = async(e) => {
 		if(selectedFile)
@@ -79,7 +96,7 @@ export default function Login() {
       console.error('Error uploading file:', error);
     }
 
-        alert("Move to Upload Dir....!");
+        // alert("Move to Upload Dir....!");
 
         // fetch('http://localhost/backend/addproductinfo.php', {
         //     method: "POST",
@@ -165,10 +182,30 @@ export default function Login() {
                   setError("Password has left blank!");
               }
               break;
+          case "producttype":
+              setError("");
+              setProductType(e.target.value);
+              if(e.target.value === ""){
+                  setError("product type has left blank!");
+              }
+              break;
           case "productimage":
               setError("");
-              setProductfileimage(e.target.files[0].name);
-              setProductimage(e.target.value);
+              // setProductfileimage(e.target.files[0].name);
+              setProductimage(e.target.files[0].name);
+              // alert("Dddd--------------");
+              // setProductimage(e.target.value);
+              if(e.target.value === ""){
+                  setError("productImg has left blank!");
+              }
+              handleFileChange(e);
+              // handleUpload(e);
+              
+              break;
+          case "productimageTest":
+              setError("");
+              // setProductfileimage(e.target.files[0].name);
+              // setProductimage(e.target.value);
               if(e.target.value === ""){
                   setError("productImg has left blank!");
               }
@@ -189,13 +226,15 @@ export default function Login() {
 
   function handleProductSubmit(){
 
-
        
-        
+        // uploading-code-------------
+        // handleUpload();
+        // handleFileChange();
+        // uploading-code-------------
   
 
     if(productName !== "" && menufacturerName !== "" && modelName !== "" && productPrice !== ""  ){
-        
+    
         var url = "http://localhost/backend/addproductinfo.php";
  
         var headers = {
@@ -209,8 +248,8 @@ export default function Login() {
           menufacturerName: menufacturerName,
           modelName: modelName,
           productPrice: productPrice,
-          // productImg: productimage
-          productImg: productfilepath
+          productImg: productimage,
+          productType: productType
 
         }
       
@@ -228,19 +267,20 @@ export default function Login() {
         })
         // .then((response) => response.json())
         .then((response) => {
-            alert("post 111");
+            alert(" Yes, Enter Product Succeccfully.!");
             
             // debugger
 
-            console.log(response[0].result);
-            setMsg(response[0].result);
+            // console.log("Post ".response[0].result);
+            console.log("Post psdppdppd".response[0]);
+            setMsg("Yes, Add Product succeccfully.!");
         }).catch((err) =>{
-          alert("not 11");
+          // alert("Not");
             
         //   debugger
-
-            setError(err);
-            console.log(err);
+            // setError(err);
+            console.log("Post Error".err);
+            console.log("Post Error----");
         });
 
 
@@ -258,7 +298,6 @@ export default function Login() {
         setError("All fields are required!");
     }
 
-    
 }
 
 
@@ -273,13 +312,16 @@ export default function Login() {
                 <div className="col-12 col-md-9 col-lg-7 col-xl-6">
                   <div className="card" style={{borderRadius: 15}}>
                     <div className="card-body p-5">
-                      <h2 className="text-uppercase text-center mb-5">Enter  Product Information 11 </h2>
+                      <h2 className="text-uppercase text-center mb-5">Enter  Product Information  </h2>
                       <p>
                           {
                               msg !== "" ?
+
                               <span className="success">{msg}</span> :
                               <span className="error">{error}</span>
                           }
+                       
+                     
                       </p>
                     
                       
@@ -327,8 +369,35 @@ export default function Login() {
                                // onBlur={checkEmail}
                             />
                         </div>
+                        {/* <div className="form-outline mb-4">
+                            <label className="form-label">Product type</label>
+                          <input 
+                                type="text"
+                                name="producttype"
+                                className="form-control form-control-lg"
+                                value={productPrice}
+                                onChange={(e) => handleInputChange(e, "producttype")}
+                               // onBlur={checkEmail}
+                            />
+                        </div> */}
+                        <div class="form-outline mb-4">
+                        <label className="form-label">Product type</label>
+                          <select class="form-control form-control-lg"   
+                          name="producttype"
+                          
+                           onChange={(e) => handleInputChange(e, "producttype")}
+                          >
+                            <option  value={productType}>Choose Product Type</option>
+                            <option value="movies">Movies</option>
+                            <option value="games">Games</option>
+                            <option value="shows">Shows</option>
+                            <option value="gadgets">gadgets</option>
+                            <option value="cloth">cloth</option>
+                            <option value="other">Other</option>
+                          </select>
+                        </div>
                         <div className="form-outline mb-4">
-                            <label className="form-label">Product Image </label>
+                            {/* <label className="form-label">Product Image </label> */}
                           {/* <input 
                                 type="file"
                                 name="productimage"
@@ -343,28 +412,45 @@ export default function Login() {
                               ref={fileInputRef} onChange={handleFileChange} /> */}
                         </div>
                         <div className="form-outline mb-4">
-                            {/* <label className="form-label">Product Img 11</label> */}
-                          <input 
-                                type="file"
-                                name="productimage"
-                                className="form-control form-control-lg"
-                                ref={fileInputRef}
-                                value={productimage}  
-                                onChange={(e) => handleInputChange(e, "productimage")}
-                              //  onBlur={checkEmail}
-                            /> 
+                            <label className="form-label">Product Image</label>
+                          {/* <input 
+                                // type="file"
+                                // name="productimage"
+                                // className="form-control form-control-lg"
+                                // className="form"
+                                // ref={fileInputRef}
+                                // value={productimage}  
+                                // onChange={(e) => handleInputChange(e, "productimage")}
+                              // onBlur={checkEmail}
+                           />   */}
+                         <div>
+                 {/* {productimage} */}
+                         </div>
+                         <div className="col col-12 d-flex justify-content-between">
+                        	<input type="file" 
+                          className="form-control form-control-lg"
+                           name="productimage"
+                           ref={fileInputRef} 
+                           onChange={(e) => handleInputChange(e, "productimage")}    
+                          // onChange={handleFileChange} 
+                          />
+                      
+                        	<button className="btn btn-primary" onClick={handleUpload}>Upload</button>
+                        </div>
+
                         </div>
                       <div>
-                      {/* <div>
-                          <img src={file? URL.createObjectURL(file) : null} alt={file? file.name : null}/>
-                          <input type="file" onChange={fileHandler} />
-                      </div> */}
+                      <div>
+                          {/* <img src={file? URL.createObjectURL(file) : null} alt={file? file.name : null}/>
+                          <input type="file" onChange={fileHandler} /> */}
+                          {/* {image ? <ImagePerview data={image} /> : <p>Please Upload Image</p>} */}
+                      </div>
                       </div>
                         <div className="d-flex justify-content-center">
                           <input 
                                 type="submit"
                                 defaultValue="Submit"
-                                className="btn btn-primary text-white btn-block btn-lg gradient-custom-4 text-body"
+                                className="btn btn-primary text-white btn-block btn-upload btn-lg gradient-custom-4 text-body"
                                 onClick={handleProductSubmit}
                             />
                         </div>
@@ -375,7 +461,7 @@ export default function Login() {
               </div>
             </div>
           </div>
-          <div className="container">
+          {/* <div className="container">
             <h1 className="mt-5 mb-5 text-center"><b>Upload File in React.js</b></h1>
 
             <div className="card">
@@ -407,7 +493,7 @@ export default function Login() {
                     </div>
                 </div>
             </div>
-        </div>
+        </div> */}
           
         </section>
     </>

@@ -28,7 +28,9 @@ color: whitesmoke;
 body {
   /* border: 2px solid red; */
 }
-
+.btn-upload {
+  color: white !important;
+}
 .imagecontainer {
   float: left;
   width: 215px;

@@ -11,7 +11,24 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
-
+.card-img-top {
+  height: 220px;
+  margin: 18px;
+  width: 90%;
+}
+.card-wrapper .card {
+  width: 22%;
+  margin: 12px;
+}
+.card-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.card-body span {
+  font-weight: 700;
+  color: gray;
+}
 .loading {
   -webkit-animation: sk-scaleout 1.0s infinite ease-in-out;
   animation: sk-scaleout 1.0s infinite ease-in-out;
