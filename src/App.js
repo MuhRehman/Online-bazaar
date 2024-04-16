@@ -191,7 +191,12 @@ const cartTotalAmount = products.reduce((acc, data) => acc + data.price * data.q
        
     </div> */}
 
-
+<div class="avatar-group">
+  <div class="avatar">
+    <span class="avatar-name">Someone 1</span>
+    <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cGVyc29ufGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60" alt="Image" />
+  </div>
+  </div>
          <div className="cart-container dropdown">
             {/* <a type="button" className="btn  fw-500 rounded  ml-2" onClick={handleDropdownClick} > */}
             <a type="button" className="btn  fw-500 rounded  ml-2" onClick={toggleDropdown} >
@@ -290,9 +295,16 @@ const cartTotalAmount = products.reduce((acc, data) => acc + data.price * data.q
       <Route path='/productinfo' element={ <ProductInfo />} />
       <Route path='/searchproduct' element={ <Searchproduct />} />
       <Route path='/contacts' element={ <Contacting />} />
-      <Route path='/productdetail' element={ <ProductDetail />} />
+      {/* <Route path='/productdetail' element={ <ProductDetail />} /> */}
       <Route path='/home' element={ <Home />} />
-    
+      <Route
+        exact
+        path="/productdetail/:id"
+        element={ <ProductDetail />}
+        // render={({ match }) => (
+        //     // <ProductDetail item={data.find((item) => String(item.id) === String(match.params.id))} />
+        // )}
+        />
       </Routes>
       </Router>
 

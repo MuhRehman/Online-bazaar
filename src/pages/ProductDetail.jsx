@@ -1,10 +1,42 @@
-import React from 'react'
+import React, { useState } from 'react';
+import { useEffect } from 'react';
+import axios from "axios";
+import {useParams} from "react-router-dom";
 
-export default function ProductDetail() {
+export default function ProductDetail(id) {
+
+
+    const {paramsId} = useParams();
+    // const thisProduct = productsData.find(prod => prod.id === productId)
+
+    console.log(paramsId,"ID");
+
+    const [products, setProducts] = useState([]);
+    
+    useEffect(() => {
+      
+        fetchProducts();
+
+    }, []);
+  
+    function fetchProducts() {
+      axios
+        .get("http://localhost/backend/productdata.php") 
+        .then((res) => {
+          console.log(res); 
+          setProducts(res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+     
+
   return (
     <div>
          <div class="container my-5">
         <div class="row">
+
             <div class="col-md-5">
                 <div class="main-img">
                     <img class="img-fluid" src="https://cdn.pixabay.com/photo/2015/07/24/18/40/model-858753_960_720.jpg" alt="ProductS" />
@@ -24,11 +56,19 @@ export default function ProductDetail() {
                     </div>
                 </div>
             </div>
+            
             <div class="col-md-7">
                 <div class="main-description px-2">
+                   
                     <div class="category text-bold">
                         Category: Women
                     </div>
+                   
+                    {/* <h1>{productId}</h1>  */}
+                    {/* <h1> Item ID: {id}</h1> */}
+                    <pre>params: {JSON.stringify(paramsId)}</pre>
+                    <pre>params: {}</pre>
+
                     <div class="product-title text-bold my-3">
                         Black dress for Women
                     </div>

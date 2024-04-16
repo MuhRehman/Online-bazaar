@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import users from "../components/UserList";
+import { Link } from "react-router-dom";
+import {useParams} from "react-router-dom";
 
 export default function Searchproduct() {
   const [products1, setproducts] = useState("");
@@ -130,9 +132,15 @@ export default function Searchproduct() {
       .filter((user) => bySearch(user, search));
   };
 
+
+
+  // const thisProduct = productsData.find(prod => prod.id === productId)
+  
+
   return (
     <>
       <div class="container">
+    
         {/* <div class="row" id="search">
 		<form id="search-form" className='row' action="" method="POST" enctype="multipart/form-data">
 			<div class="form-group col-9">
@@ -204,7 +212,11 @@ export default function Searchproduct() {
             {productsSearchResult.length ? (
               productsSearchResult.map((productitemlist) => (
                 <div className="card col-3 ">
-               
+               {/* <Link className="btn-item auction-btn mr-2" to={`/productdetail/${productitemlist.id}`}> */}
+               <Link className="btn-item auction-btn mr-2"  to={`/productdetail/${productitemlist.id}`}>
+               {/* <Link className="btn-item auction-btn mr-2" to={`/productDetails/${productitemlist.id}`}> */}
+
+
                     <img
                       className="card-img-top"
                       src={`http://localhost/backend/upload/${productitemlist.pimg}`}
@@ -218,6 +230,7 @@ export default function Searchproduct() {
                     <p> Price :<span>{productitemlist.pprice}</span></p>
                     <h6> Type : {productitemlist.ptype}</h6>
                    </div>
+                   </Link>
                   </div>
              
               ))
