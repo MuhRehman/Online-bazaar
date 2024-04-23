@@ -16,9 +16,10 @@ export default function ProductDetail(id) {
     useEffect(() => {
       
         fetchProducts();
-
+       
     }, []);
-  
+    
+
     function fetchProducts() {
       axios
         .get("http://localhost/backend/productdata.php") 
@@ -123,8 +124,8 @@ export default function ProductDetail(id) {
                     <p class="text-secondary">View delivery options here</p>
                 </div>
                 
-             
             </div>
+
         </div>
     </div>
 
@@ -135,6 +136,7 @@ export default function ProductDetail(id) {
         <p class="display-5">Similar Products</p>
 
         <div class="row">
+            
             <div class="col-md-3">
                 <div class="similar-product">
                     <img class="w-100" src="https://source.unsplash.com/gsKdPcIyeGg" alt="Preview" />
@@ -163,6 +165,7 @@ export default function ProductDetail(id) {
                     <p class="price">$120</p>
                 </div>
             </div>
+
         </div>
     </div>
 
