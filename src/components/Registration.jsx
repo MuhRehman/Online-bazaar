@@ -9,6 +9,7 @@ const Registration = () => {
     
     const [user, setUser] = useState("");
     const [user_email, setEmail] = useState("");
+    const [user_role, setRole] = useState("");
     const [pass1, setPass1] = useState("");
     const [pass2, setPass2] = useState("");
     const [error, setError] = useState("");
@@ -16,6 +17,7 @@ const Registration = () => {
     const [ spinner, setSpinner ] = useState(false);
 
     const navigate = useNavigate();
+    
     useEffect(() => {
         setTimeout(function(){
             setMsg("");
@@ -39,6 +41,15 @@ const Registration = () => {
             case "user_email":
                 setError("");
                 setEmail(e.target.value);
+                if(e.target.value === ""){
+                    setError("Email has left blank!");
+                }
+                break;
+            case "user_role":
+                setError("");
+                setRole(e.target.value);
+
+                // console.log(user_role);
                 if(e.target.value === ""){
                     setError("Email has left blank!");
                 }
@@ -81,6 +92,7 @@ const Registration = () => {
             var Data = {
                 user: user,
                 email: user_email,
+                roles: user_role,
                 pass: pass2
             }
             
@@ -125,18 +137,18 @@ const Registration = () => {
             // })
             // .catch((error) => console.log(error));
 
-      //       fetch(url,{
-      //             method: "POST",
-      //             headers: headers,
-      //             // body: JSON.stringify(Data)
-      //           })
-      // .then(response => response.json() )
-      // .then(json =>  {
-      //   console.log(json)
-      //   setMsg(json.title)
-      // }
-    
-      // );
+            //       fetch(url,{
+            //             method: "POST",
+            //             headers: headers,
+            //             // body: JSON.stringify(Data)
+            //           })
+            // .then(response => response.json() )
+            // .then(json =>  {
+            //   console.log(json)
+            //   setMsg(json.title)
+            // }
+          
+            // );
             
             setUser("");
             setEmail("");
@@ -287,6 +299,16 @@ const Registration = () => {
                                 onChange={(e) => handleInputChange(e, "user_email")}
                                // onBlur={checkEmail}
                             />
+                        </div>
+                        <div className="form-outline mb-4">
+                          <label className="form-label">Your Role</label>
+                          <select class="form-select" 
+                           onChange={(e) => handleInputChange(e, "user_role")}       name="user_role"   aria-label="Default select example">
+                            <option   selected>Open this select you role</option>
+                            <option value="1">Customer/Buyer </option>
+                            <option value="2">Seller</option>
+                            <option value="3">Admin</option>
+                          </select>
                         </div>
                         <div className="form-outline mb-4">
                           <label className="form-label">Password</label>

@@ -1,13 +1,23 @@
 import React, { useState } from 'react';
 import { useEffect } from 'react';
 import axios from "axios";
-import {useParams} from "react-router-dom";
+import {useParams, useLocation} from "react-router-dom";
+
 
 export default function ProductDetail(id) {
 
 
     const {paramsId} = useParams();
+    // const {id}= useParams()
+    
     // const thisProduct = productsData.find(prod => prod.id === productId)
+  
+    const { state } = useLocation(); // <-- access route state
+
+    const { item } = state || {}; // <-- unpack the item from state
+      
+    console.log(item,"Main item");
+
 
     console.log(paramsId,"ID");
 
@@ -24,7 +34,7 @@ export default function ProductDetail(id) {
       axios
         .get("http://localhost/backend/productdata.php") 
         .then((res) => {
-          console.log(res); 
+          console.log(res,"Fatch request ID"); 
           setProducts(res.data);
         })
         .catch((err) => {

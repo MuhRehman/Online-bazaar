@@ -17,12 +17,13 @@
  
         $user = $dData['user'];
         $email = $dData['email'];
+        $roles = $dData['role'];
         $pass = $dData['pass'];
  
         $result = "";
  
         if($user != "" and $email != "" and $pass != ""){
-            $sql = "INSERT INTO user(user, email, pass) VALUES('$user', '$email', '$pass');";
+            $sql = "INSERT INTO user(user, email, roles, pass) VALUES('$user', '$email','pppp','$pass');";
             $res = mysqli_query($conn, $sql);
             if($res){
                 $result = "You have registered successfully!";

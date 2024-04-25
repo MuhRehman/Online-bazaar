@@ -229,6 +229,7 @@ export default function Searchproduct() {
                     <p> Brand : <span>{productitemlist.pmname}</span></p>
                     <p> Price :<span>{productitemlist.pprice}</span></p>
                     <h6> Type : {productitemlist.ptype}</h6>
+                    <button>Add to Cart</button>
                    </div>
                    </Link>
                   </div>

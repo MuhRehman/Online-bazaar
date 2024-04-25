@@ -27,7 +27,8 @@ function App() {
     const dropdownRef = useRef(null);
     const toggleDropdown = () => {
      
-      setIsOpen(!isOpen);
+        setIsOpen(!isOpen);
+
     };
 
     const productData = [
@@ -299,7 +300,8 @@ const cartTotalAmount = products.reduce((acc, data) => acc + data.price * data.q
       <Route path='/home' element={ <Home />} />
       <Route
         exact
-        path="/productdetail/:id"
+        path="/page/:id"
+        // path="/productdetail/:id"
         element={ <ProductDetail />}
         // render={({ match }) => (
         //     // <ProductDetail item={data.find((item) => String(item.id) === String(match.params.id))} />
