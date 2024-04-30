@@ -7,12 +7,14 @@ import Searchproduct from "./pages/Searchproduct.jsx";
 import Contacting from "./components/Contacting.jsx";
 import { useNavigate } from "react-router-dom";
 
+
 import {
   BrowserRouter as Router,
   Routes,
   Route,
   Link
 } from "react-router-dom";
+
 import ProductDetail from "./pages/ProductDetail.jsx";
 import Home from "./pages/Home.jsx";
 import { useState, useEffect, useRef } from "react";
@@ -102,7 +104,9 @@ function App() {
           "qty": 1,
       }
   ]
+
   const [products, SetProducts] = useState(productData);
+
 // -------------------Cart--
    // -----Increment Event------
    const increaseQuantity = (i) => {
@@ -228,7 +232,7 @@ console.log("Login main local storage ",Username);
            <Link to="/contacts" className="fw-bolder">Contacting</Link>
          </li>
          <li>
-           <Link to="/productdetail" className="fw-bolder">Product Detail</Link>
+           <Link to="/productdetail/2" className="fw-bolder">Product Detail</Link>
          </li>
          <li>
            <Link to="/home" className="fw-bolder">Home</Link>
@@ -365,11 +369,12 @@ console.log("Login main local storage ",Username);
       <Route path='/home' element={ <Home />} />
       <Route path='/admin' element={ <Admin />} />
       <Route
-        exact
+        // exact
         // path="/page/:id"
         // path="/:id/productdetail"
         // path="/portfolio/:id/"
-        path="/productdetail"
+        // path="/productdetail"
+        path="/productdetail/:id"
         element={ <ProductDetail />}
         // render={({ match }) => (
         //     // <ProductDetail item={data.find((item) => String(item.id) === String(match.params.id))} />

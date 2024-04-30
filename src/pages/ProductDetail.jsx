@@ -1,13 +1,16 @@
 import React, { useState } from 'react';
 import { useEffect } from 'react';
 import axios from "axios";
-import {useParams, useLocation} from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
+
+export default function ProductDetail() {
 
 
-export default function ProductDetail(id) {
+ 
+    const { id } = useParams();
+    
+    console.log(id,"ID  test");
 
-
-    const {paramsId} = useParams();
     // const {id}= useParams()
     
     // const thisProduct = productsData.find(prod => prod.id === productId)
@@ -16,15 +19,11 @@ export default function ProductDetail(id) {
 
     const { item } = state || {}; // <-- unpack the item from state
       
-    console.log(item,"Main item");
+    // console.log(item,"Main item");
 
 
-    console.log(paramsId,"ID");
-    const queryString = window.location.search;
-    const urlParams = new URLSearchParams(queryString);
-    const paramValue = urlParams.get('paramName');
+    
  
-    console.log(paramValue);
 
     const [products, setProducts] = useState([]);
     
@@ -56,19 +55,19 @@ export default function ProductDetail(id) {
 
             <div class="col-md-5">
                 <div class="main-img">
-                    <img class="img-fluid" src="https://cdn.pixabay.com/photo/2015/07/24/18/40/model-858753_960_720.jpg" alt="ProductS" />
+                    <img class="img-fluid" src="https://placehold.co/600x400" alt="ProductS" />
                     <div class="row my-3 previews">
                         <div class="col-md-3">
-                            <img class="w-100" src="https://cdn.pixabay.com/photo/2015/07/24/18/40/model-858754_960_720.jpg" alt="Sale" />
+                            <img class="w-100" src="https://placehold.co/600x400/000000/FFFFFF/png" alt="Sale" />
                         </div>
                         <div class="col-md-3">
-                            <img class="w-100" src="https://cdn.pixabay.com/photo/2015/07/24/18/38/model-858749_960_720.jpg" alt="Sale" />
+                            <img class="w-100" src="https://placehold.co/600x400/000000/FFFFFF/png" alt="Sale" />
                         </div>
                         <div class="col-md-3">
-                            <img class="w-100" src="https://cdn.pixabay.com/photo/2015/07/24/18/39/model-858751_960_720.jpg" alt="Sale" />
+                            <img class="w-100" src="https://placehold.co/600x400/000000/FFFFFF/png" alt="Sale" />
                         </div>
                         <div class="col-md-3">
-                            <img class="w-100" src="https://cdn.pixabay.com/photo/2015/07/24/18/37/model-858748_960_720.jpg" alt="Sale" />
+                            <img class="w-100" src="https://placehold.co/600x400/000000/FFFFFF/png" alt="Sale" />
                         </div>
                     </div>
                 </div>
@@ -83,7 +82,7 @@ export default function ProductDetail(id) {
                    
                     {/* <h1>{productId}</h1>  */}
                     {/* <h1> Item ID: {id}</h1> */}
-                    <pre>params: {JSON.stringify(paramsId)}</pre>
+                    {/* <pre>params: {JSON.stringify(paramsId)}</pre> */}
                     <pre>params: {}</pre>
 
                     <div class="product-title text-bold my-3">
@@ -199,7 +198,7 @@ export default function ProductDetail(id) {
             
             <div class="col-md-3">
                 <div class="similar-product">
-                    <img class="w-100" src="https://source.unsplash.com/gsKdPcIyeGg" alt="Preview" />
+                    <img class="w-100" src="https://placehold.co/600x400" alt="Preview" />
                     <p class="title">Lovely black dress</p>
                     <p class="price">$100</p>
                 </div>
