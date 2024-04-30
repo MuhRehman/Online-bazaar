@@ -78,7 +78,7 @@ export default function Login() {
                    //  if (res[0].result == "login") {
                  if (res[0].result[2] == email ) {
                  setMsg(res[0].result);
-                 alert("Yes, Login succeccfully.!")
+                 alert("Yes, Login Succeccfully.!")
                  navigate("/home");
                  } else {
                      setError(res[0].result);

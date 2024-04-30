@@ -176,9 +176,9 @@ console.log("Login main local storage ",Username);
 
 // -------------------Cart--
   const handleDropdownClick = () => {
-    alert("Ss");
     setDropdownState(!dropdownState);
   };
+
   const handleSetDropdownValue = (value) => {
     setDropdownValue(value);
     setDropdownState(!dropdownState);
@@ -191,15 +191,13 @@ console.log("Login main local storage ",Username);
   };
 
   const handleClickOutlogout = (event) => {
-    alert("Dd");
+  
     localStorage.removeItem("items");
-
-    
 
     // navigate("/login");
   
-
   };
+
   useEffect(() => {
     document.addEventListener('mousedown', handleClickOutside);
 
@@ -232,7 +230,7 @@ console.log("Login main local storage ",Username);
            <Link to="/contacts" className="fw-bolder">Contacting</Link>
          </li>
          <li>
-           <Link to="/productdetail/2" className="fw-bolder">Product Detail</Link>
+           <Link to="/productdetail/id" className="fw-bolder">Product Detail</Link>
          </li>
          <li>
            <Link to="/home" className="fw-bolder">Home</Link>

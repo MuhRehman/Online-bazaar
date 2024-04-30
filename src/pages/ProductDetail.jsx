@@ -6,7 +6,7 @@ import { useParams, useLocation } from "react-router-dom";
 export default function ProductDetail() {
 
 
- 
+    let [cartItems, setCartItems] = useState([])
     const { id } = useParams();
     
     console.log(id,"ID  test");
@@ -36,7 +36,7 @@ export default function ProductDetail() {
 
     function fetchProducts() {
       axios
-        .get("http://localhost/backend/productdata.php") 
+        .get('http://localhost/backend/productdata.php')
         .then((res) => {
           console.log(res,"Fatch request ID"); 
           setProducts(res.data);
@@ -44,7 +44,42 @@ export default function ProductDetail() {
         .catch((err) => {
           console.log(err);
         });
+
     }
+    // console.log(clear);
+    // console.log("ff",products[0].map(item => console.log(item.id)));
+    // console.log("Id Product",products[0]);
+
+            
+        // for (i=0 ; i<products.length;i++)
+        // {
+        //     console.log("Id Product",products[i]);
+        // }
+        for (let index = 0; index < 1; index++) {
+            for (let i = 0; i < products.length; i++) {
+                let obj = products[index][id];
+                //console.log('testing',products[index][i]);
+                console.log("obj",obj);
+            }
+          
+            
+        }
+    // products[0].map(d) =>  {console.log(d.id)}
+    // const ids = products.data.map(item => item.map(obj => obj.id));
+
+    // console.log(ids);
+
+    console.log("products id ", products[0]);
+    
+    const addProduct = (product) => {
+        const productExist = cartItems.find(item => item.id === product.id)
+        if (productExist) {
+           setCartItems(cartItems.map(item => item.id === product.id?
+               {...productExist, quantity: productExist.quantity + 1}: item));
+        } else {
+           setCartItems([...cartItems, {...product, quantity: 1}])
+        }
+        }
      
 
   return (
