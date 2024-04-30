@@ -22,10 +22,12 @@ color: whitesmoke;
 }
 .Navbar-link {
   color: red;
-
-  
+  z-index: 999;
+  position: relative;  
 }
-
+.list-group  {
+  margin-top: 60px;
+}
 .btn-upload {
   color: white !important;
 }
@@ -185,6 +187,93 @@ color: whitesmoke;
     vertical-align: middle;
 }
   /* -----------shoping-cart--------- */
+  /* -----------Feedback--------- */
+  .heading {
+    font-size: 18px;
+  }
+  
+  .para {
+    font-weight: 600;
+  }
+  
+  .feedback-level {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .level {
+    background: white;
+    padding: 13px;
+    border-radius: 7px;
+    border: solid 0.5px #e0e9fe;
+    cursor: pointer;
+  }
+  .level:hover {
+    box-shadow: #fe73a5 0 2px 5px;
+  }
+  .level:hover i {
+    color: #fe73a5;
+  }
+  .level i {
+    font-size: 40px;
+  }
+  
+  .feedback-msg textarea {
+    margin-top: 5px;
+    border: solid 2px #e0e9fe;
+    padding: 13px;
+    border-radius: 7px;
+    outline: none;
+    font-size: 14px;
+    color: #4b537c;
+    font-weight: 500;
+    letter-spacing: 1px;
+    width: 100%;
+    height: 80px;
+    resize: none;
+  }
+  
+  .agreement .checkbox {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    margin-bottom: 5px;
+  }
+  .agreement input {
+    accent-color: #ff71a4;
+  }
+  .agreement a {
+    color: #ff71a4;
+    font-size: 12px;
+    font-weight: 600;
+  }
+  .agreement label {
+    font-size: 12px;
+    font-weight: 600;
+  }
+  
+  .buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: end;
+  }
+  .buttons a {
+    background: white;
+    color: #4b537c;
+    width: 80px;
+    padding: 10px;
+    text-align: center;
+    border-radius: 4px;
+  }
+  .buttons a:hover {
+    opacity: 0.9;
+  }
+  .buttons a:nth-child(1) {
+    background: #fe71a4;
+    color: #f8faff;
+  }
+  
+  /* -----------Feedback--------- */
 
   
 /* start: Avatar */
@@ -247,3 +336,31 @@ color: whitesmoke;
   box-shadow: 0 .25rem 1rem rgba(0, 0, 0, .1);
 }
 /* end: Avatar */
+/* end: Admin */
+.sidebar{
+  top: 0;
+  left : 0;
+  z-index : 100;
+  overflow-y: auto;
+}
+
+.overlay{
+  background-color: rgb(0 0 0 / 45%);
+  z-index: 99;
+}
+
+/* sidebar for small screens */
+@media screen and (max-width: 767px){
+  
+  .sidebar{
+    max-width: 18rem;
+    transform : translateX(-100%);
+    transition : transform 0.4s ease-out;
+  }
+  
+  .sidebar.active{
+    transform : translateX(0);
+  }
+  
+}
+/* end: Admin */

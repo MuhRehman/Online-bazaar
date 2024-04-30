@@ -25,6 +25,12 @@ export default function Home() {
     navigate(path);
   }
   
+
+
+  let Username =  localStorage.getItem("items");
+
+
+  
   return (
     <div>
         
@@ -39,9 +45,13 @@ export default function Home() {
 <button class="btn btn-primary d-none d-lg-block"><i class="fa-solid fa-magnifying-glass rounded d-none d-lg-block"></i></button>
 
 <div class="ms-md-5 mt-2 mt-md-0">
-  <a type="button" class="btn btn-outline-primary fw-500 rounded ">
-    <i class="fa-solid fa-user me-lg-2"></i><p class="d-none d-lg-inline" style={{marginRight: '12px'}}>Sign in</p>
-  </a>
+
+{ Username ? <a type="button" class="btn btn-outline-primary fw-500 rounded ">
+    <i class="fa-solid fa-user me-lg-2"></i><p class="d-none d-lg-inline" style={{marginRight: '12px'}}>Logout</p>
+  </a> : <a type="button" class="btn btn-outline-primary fw-500 rounded ">
+    <i class="fa-solid fa-user me-lg-2"></i><p class="d-none d-lg-inline" style={{marginRight: '12px'}}>Sign In</p>
+  </a> }
+  
   <a type="button" class="btn btn-outline-primary fw-500 rounded ml-2"  style={{marginLeft: '12px'}}>
     <i class="fa-solid fa-heart me-lg-2"></i><p class="d-none d-lg-inline" >Wishlist</p>
   </a>

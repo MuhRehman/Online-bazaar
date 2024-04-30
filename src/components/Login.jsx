@@ -64,14 +64,26 @@ export default function Login() {
               // console.log( JSON.stringify(data, null, 2));
               alert("post");
                 //  console.log(data);
-                   console.log(res[0].result);
-                   if (res[0].result == "login") {
-                     setMsg(res[0].result);
-                     alert("Yes, Login succeccfully.!")
-                  navigate("/home");
+                   console.log('Testing ',res[0]);
+                   console.log('res ',res[0].result[2]);
+                   console.log('res  role ',res[0].result[3]);
+                   localStorage.setItem('items', JSON.stringify(res[0].result[1]));
+                   localStorage.setItem('roles', JSON.stringify(res[0].result[3]));
+
+                   let Username =  localStorage.getItem("items");
+                   let roleid =  localStorage.getItem("roles");
+                               
+                   console.log("local storage ", roleid);
+                    
+                   //  if (res[0].result == "login") {
+                 if (res[0].result[2] == email ) {
+                 setMsg(res[0].result);
+                 alert("Yes, Login succeccfully.!")
+                 navigate("/home");
                  } else {
                      setError(res[0].result);
                  }
+
               // console.log(data[0].result);
             })
             .catch((error) => {
@@ -80,7 +92,8 @@ export default function Login() {
             });
 
         }
-            // echo "Connected Not insert!";exit;
+        
+        // echo "Connected Not insert!";exit;
         //     $sqlquery = "INSERT INTO users(name, email, password) VALUES('$user', '$email', '$pass');";
         //     if ($mysqli->query($sqlquery) === TRUE) {
         //         echo "New record created successfully";

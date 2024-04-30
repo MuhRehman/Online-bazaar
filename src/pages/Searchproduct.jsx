@@ -213,7 +213,7 @@ export default function Searchproduct() {
               productsSearchResult.map((productitemlist) => (
                 <div className="card col-3 ">
                {/* <Link className="btn-item auction-btn mr-2" to={`/productdetail/${productitemlist.id}`}> */}
-               <Link className="btn-item auction-btn mr-2"  to={`/productdetail/${productitemlist.id}`}>
+               <Link className="btn-item auction-btn mr-2"  to={`/productdetail/`}>
                {/* <Link className="btn-item auction-btn mr-2" to={`/productDetails/${productitemlist.id}`}> */}
 
 

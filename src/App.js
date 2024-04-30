@@ -2,9 +2,10 @@ import Registration from "./components/Registration.jsx";
 import './App.css';
 import Login from "./components/Login.jsx";
 import ProductInfo from "./pages/ProductInfo.jsx";
+import Admin from "./pages/admin.jsx";
 import Searchproduct from "./pages/Searchproduct.jsx";
 import Contacting from "./components/Contacting.jsx";
-
+import { useNavigate } from "react-router-dom";
 
 import {
   BrowserRouter as Router,
@@ -17,12 +18,22 @@ import Home from "./pages/Home.jsx";
 import { useState, useEffect, useRef } from "react";
 
 
+
+
+
+
+
 function App() {
 
   const [dropdownState, setDropdownState] = useState(true);
   const [dropdownValue, setDropdownValue] = useState("");
 
-  
+  const [showLogout, setShowLogout] = useState(false);
+  const onClick = () => setShowLogout(true);
+
+
+ 
+    const [isAdmin, setIsAdmin] = useState();
     const [isOpen, setIsOpen] = useState();
     const dropdownRef = useRef(null);
     const toggleDropdown = () => {
@@ -31,6 +42,29 @@ function App() {
 
     };
 
+    let readrole = localStorage.getItem('roles');
+    // let readrole1 = localStorage.getItem('roles')=== "3"?  alert("admin") : alert("Not ");
+
+       
+   
+    
+ 
+    
+    console.log("role role ",readrole);
+    let Username1 =  localStorage.getItem("items");
+    // alert(readrole);
+    // alert(Username1);
+    var readToken = localStorage.getItem('token');
+    // if (readEmail == "" || readEmail == null || readToken == "" || readToken == null) {
+    //   $(".btn-logout").hide();
+    //   $(".btn-login").show();
+    // } else {
+    //   $(".btn-login").hide();
+    //   $(".btn-logout").show();
+    // }
+
+    // const navigate = useNavigate();
+    
     const productData = [
       {
           "id": 1,
@@ -131,6 +165,11 @@ const emptycart = () => {
 const cartTotalQty = products.reduce((acc, data) => acc + data.qty, 0);
 const cartTotalAmount = products.reduce((acc, data) => acc + data.price * data.qty, 0);
 
+
+let Username =  localStorage.getItem("items");
+
+console.log("Login main local storage ",Username);
+
 // -------------------Cart--
   const handleDropdownClick = () => {
     alert("Ss");
@@ -145,6 +184,17 @@ const cartTotalAmount = products.reduce((acc, data) => acc + data.price * data.q
     if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
       setIsOpen(false);
     }
+  };
+
+  const handleClickOutlogout = (event) => {
+    alert("Dd");
+    localStorage.removeItem("items");
+
+    
+
+    // navigate("/login");
+  
+
   };
   useEffect(() => {
     document.addEventListener('mousedown', handleClickOutside);
@@ -183,21 +233,36 @@ const cartTotalAmount = products.reduce((acc, data) => acc + data.price * data.q
          <li>
            <Link to="/home" className="fw-bolder">Home</Link>
          </li>
+         { readrole == "\"3\"" ? <li>
+           <Link to="/admin" className="fw-bolder">Admin</Link>
+         </li> : 
+          <p>Not Admin {readrole} </p>
+         } 
+        
          
       
          {/* <div className="dropdown">
-      <button className="dropdown-toggle" >
+    <button className="dropdown-toggle" >
         Dropdown
-      </button>
-       
-    </div> */}
+    </button>
+        </div>  */}
 
-<div class="avatar-group">
-  <div class="avatar">
-    <span class="avatar-name">Someone 1</span>
-    <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cGVyc29ufGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60" alt="Image" />
-  </div>
-  </div>
+        { Username ? <a type="button" class="btn btn-outline-primary fw-500 rounded ">
+            <i class="fa-solid fa-user me-lg-2"></i><p class="btn border border-white border-3 text-bg-light fw-bolder mt-1 " style={{marginRight: '12px'}}>Logout</p>
+        </a> : <a type="button" class="btn btn-outline-primary fw-500 rounded ">
+            <i class="fa-solid fa-user me-lg-2"></i><p class="btn border border-white border-3 text-bg-light fw-bolder " style={{marginRight: '12px'}}>Sign In</p>
+        </a> }
+{/* <div class="avatar-group">
+  <div class="btn border border-white border-3 text-bg-light fw-bolder " onClick={handleClickOutlogout}>
+              Log out
+    </div>
+  </div> */}
+        <div class="avatar-group">
+        <div class="avatar">
+            <span class="avatar-name">{Username}</span>
+            <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cGVyc29ufGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60" alt="Image" />
+        </div>
+        </div>
          <div className="cart-container dropdown">
             {/* <a type="button" className="btn  fw-500 rounded  ml-2" onClick={handleDropdownClick} > */}
             <a type="button" className="btn  fw-500 rounded  ml-2" onClick={toggleDropdown} >
@@ -298,10 +363,13 @@ const cartTotalAmount = products.reduce((acc, data) => acc + data.price * data.q
       <Route path='/contacts' element={ <Contacting />} />
       {/* <Route path='/productdetail' element={ <ProductDetail />} /> */}
       <Route path='/home' element={ <Home />} />
+      <Route path='/admin' element={ <Admin />} />
       <Route
         exact
-        path="/page/:id"
-        // path="/productdetail/:id"
+        // path="/page/:id"
+        // path="/:id/productdetail"
+        // path="/portfolio/:id/"
+        path="/productdetail"
         element={ <ProductDetail />}
         // render={({ match }) => (
         //     // <ProductDetail item={data.find((item) => String(item.id) === String(match.params.id))} />

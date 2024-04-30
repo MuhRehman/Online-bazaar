@@ -92,8 +92,8 @@ const Registration = () => {
             var Data = {
                 user: user,
                 email: user_email,
-                roles: user_role,
-                pass: pass2
+                pass: pass2,
+                roleid: user_role
             }
             
             console.log('login data',Data);

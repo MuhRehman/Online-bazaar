@@ -20,6 +20,11 @@ export default function ProductDetail(id) {
 
 
     console.log(paramsId,"ID");
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const paramValue = urlParams.get('paramName');
+ 
+    console.log(paramValue);
 
     const [products, setProducts] = useState([]);
     
@@ -45,7 +50,8 @@ export default function ProductDetail(id) {
 
   return (
     <div>
-         <div class="container my-5">
+        
+        <div class="container my-5">
         <div class="row">
 
             <div class="col-md-5">
@@ -139,7 +145,51 @@ export default function ProductDetail(id) {
         </div>
     </div>
 
+    <form class="container">
+  <h1 class="heading">Give feedback</h1>
+  <p class="para">What do you think of the issue with this pr?</p>
 
+  <div class="feedback-level">
+    <div class="level">
+      <i class="lar la-sad-tear"></i>
+    </div>
+    <div class="level">
+      <i class="las la-frown"></i>
+    </div>
+    <div class="level">
+      <i class="lar la-meh"></i>
+    </div>
+    <div class="level">
+      <i class="lar la-smile"></i>
+    </div>
+    <div class="level">
+      <i class="lar la-grin"></i>
+    </div>
+  </div>
+
+  <div class="feedback-msg">
+    <p class="para">
+      What are the main reasons for your rating?
+    </p>
+    <textarea name="" id=""></textarea>
+  </div>
+
+  <div class="agreement">
+    <div class="checkbox">
+      <input type="checkbox" name="" id="" />
+      <label for="">I may be contacted about this feedback <a href="#">Privacy Policy</a>.</label>
+    </div>
+    <div class="checkbox">
+      <input type="checkbox" name="" id="" />
+      <label for="">I'd like to help improve by joining the <a href="#">Reasearch Group</a>.</label>
+    </div>
+  </div>
+
+  <div class="buttons">
+    <a href="javascript:alert('Thanks for submiting your feedback')">Submit</a>
+    <a href="You just cancelled your to submit the feedback">Cancel</a>
+  </div>
+</form>
 
     <div class="container similar-products my-4">
         {/* <hr> */}
