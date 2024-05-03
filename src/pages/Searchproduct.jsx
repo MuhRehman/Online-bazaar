@@ -85,8 +85,13 @@ export default function Searchproduct() {
         // console.log(data[0]);
         setproductsItem(data[0]);
         setproductsSearchResult(data[0]);
+        
+        
       });
+
   }, []);
+
+  // console.log(productsItem,"Products Item Search");
 
 
   const handleSearch = (e) => {
@@ -209,6 +214,8 @@ export default function Searchproduct() {
 
         <div className="render-area">
           <div className="card-wrapper mt-4">
+         
+
             {productsSearchResult.length ? (
               productsSearchResult.map((productitemlist) => (
                 <div className="card col-3 ">

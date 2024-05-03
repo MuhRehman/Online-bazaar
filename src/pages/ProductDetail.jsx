@@ -9,7 +9,7 @@ export default function ProductDetail() {
     let [cartItems, setCartItems] = useState([])
     const { id } = useParams();
     
-    console.log(id,"ID  test");
+    // console.log(id,"ID  test");
 
     // const {id}= useParams()
     
@@ -26,65 +26,131 @@ export default function ProductDetail() {
  
 
     const [products, setProducts] = useState([]);
+    const [productsId, setProductsId] = useState({});
     
     useEffect(() => {
       
         fetchProducts();
+        // fetch("http://localhost/backend/productdata.php")
+        // .then((data) => data.json())
+        // .then((data) => {
+        //   // alert("Fatch call..");
+        //   // console.log(data[0]);
+        //   setProducts(data[0]);          
+        // });
+        
+
+          
+ 
        
     }, []);
     
 
     function fetchProducts() {
-      axios
-        .get('http://localhost/backend/productdata.php')
+    //   alert("test");
+        axios
+        .get('http://localhost/backend/searchproductdata.php')
         .then((res) => {
-          console.log(res,"Fatch request ID"); 
+        //   console.log(res,"Fatch request ID"); 
           setProducts(res.data);
+
+        
         })
         .catch((err) => {
           console.log(err);
         });
 
     }
+    //  debugger
+
+    console.log("products Fatch request ",products);
+    let ss = products.find(x=>x.id==4);
+    
+    // ?.map(sn => (
+    
+    //     <li>{sn.id}</li>
+    // ));
+    
+    // console.log("Product 1w1 ",ss);
+    console.log("Testing Products ",ss);
+
+    // setProductsId(ss);
+
+    // for (let i = 0; i < products.length; i++) {
+    //     let productsObj = products[i];
+    //     // debugger
+        
+    //     //console.log('testing',products[index][i]);
+    //     //  console.log("object",obj.id );
+    //     console.log("Yes, obj",productsObj);
+    //     console.log("Id condition obj",productsObj.id, id);
+    //     if(productsObj.id == id  ) {
+    //         // alert("dd");
+    //         console.log("Id condition obj",productsObj.id);
+    //         setProductsId(productsObj);
+    //     }
+    // }
     // console.log(clear);
     // console.log("ff",products[0].map(item => console.log(item.id)));
-    // console.log("Id Product",products[0]);
+ 
 
-            
         // for (i=0 ; i<products.length;i++)
         // {
         //     console.log("Id Product",products[i]);
         // }
-        for (let index = 0; index < 1; index++) {
-            for (let i = 0; i < products.length; i++) {
-                let obj = products[index][id];
-                //console.log('testing',products[index][i]);
-                console.log("obj",obj);
-            }
-          
-            
-        }
+                
     // products[0].map(d) =>  {console.log(d.id)}
     // const ids = products.data.map(item => item.map(obj => obj.id));
 
     // console.log(ids);
 
-    console.log("products id ", products[0]);
+    // console.log("products id ", products[0]);
     
-    const addProduct = (product) => {
-        const productExist = cartItems.find(item => item.id === product.id)
-        if (productExist) {
-           setCartItems(cartItems.map(item => item.id === product.id?
-               {...productExist, quantity: productExist.quantity + 1}: item));
-        } else {
-           setCartItems([...cartItems, {...product, quantity: 1}])
-        }
-        }
+    // const addProduct = (product) => {
+    //     const productExist = cartItems.find(item => item.id === product.id)
+    //     if (productExist) {
+    //        setCartItems(cartItems.map(item => item.id === product.id?
+    //            {...productExist, quantity: productExist.quantity + 1}: item));
+    //     } else {
+    //        setCartItems([...cartItems, {...product, quantity: 1}])
+    //     }
+    //     }
      
 
   return (
-    <div>
+    <>
         
+
+
+        <div>
+{
+/* {
+       Object.keys(ss).map((obj, i) => {
+        return (
+            <div>
+                id is: {ss[obj].id} ;
+                name is: {ss[obj].name}
+            </div>
+        )
+    })
+} */
+}
+    
+
+                    <h1>Testing  {ss.id}</h1>
+                    <h1>Testing  {ss.pname}</h1>
+                    <h1>Testing  {ss.pmname}</h1>
+                    <h1>Testing  {ss.pmodel}</h1>
+    
+           
+{/* 
+            {products.find(x=>x.id==4).map((x)=>
+         {
+            <li>{x.id}</li>
+         }
+                
+            )} */}
+        </div>
         <div class="container my-5">
         <div class="row">
 
@@ -266,7 +332,7 @@ export default function ProductDetail() {
 
 
 
-    </div>
+    </>
 
  
   )
