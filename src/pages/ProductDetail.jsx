@@ -46,6 +46,102 @@ export default function ProductDetail() {
     }, []);
     
 
+    const handleInputChange = (e, type) => {
+      
+        switch(type){
+         
+            case "user":
+                setError("");
+                setUser(e.target.value);
+                if(e.target.value === ""){
+                  
+                    setError("Username has left blank!");
+                }
+                break;
+            case "user_email":
+                setError("");
+                setEmail(e.target.value);
+                if(e.target.value === ""){
+                    setError("Email has left blank!");
+                }
+                break;
+           
+            case "pass2":
+                setError("");
+                setPass2(e.target.value);
+                if(e.target.value === ""){
+                    setError("Confirm password has left blank!");
+                }
+                else if(e.target.value !== pass1){
+                    setError("Confirm password does not match!")
+                }
+                break;
+            default:
+        }
+    }
+
+    function handleSubmit(){
+        setSpinner(true);
+        
+        if(user !== "" && user_email !== "" && pass1 !== "" && pass2 !== ""){
+              
+              
+              var url = "http://localhost/backend/mailer/registration.php";
+            
+       
+              var headers = {
+                  "Accept": "application/json",
+                  "Content-Type": "application/json"
+              };
+              var Data = {
+                  user: user,
+                  email: user_email,
+                  pass: pass2,
+                  roleid: user_role
+              }
+              
+              console.log('login data',Data);
+      
+  
+              fetch(url, {
+                  method: "POST",
+                  headers: headers,
+                  body: JSON.stringify(Data)
+              })
+              // .then((response) => response.json())
+              .then((response) => {
+                  setSpinner(false);
+                  alert("Registered Successfully");
+                  navigate("/login");
+                  // debugger
+  
+                  console.log("response: ", response);
+                  // setMsg(response[0].result);
+              }).catch((err) =>{
+                setSpinner(false);
+                alert("Not Insert HS");
+              //   debugger
+              setSpinner(false);
+                  setError(err);
+                  console.log(err);
+              });
+  
+  
+            
+              
+              setUser("");
+              setEmail("");
+              setPass1("");
+              setPass2("");
+  
+              // sendEmailComfirm();
+  
+          }
+          else{
+              setError("All fields are required!");
+          }
+      }
+
     function fetchProducts() {
     //   alert("test");
         axios
@@ -61,6 +157,11 @@ export default function ProductDetail() {
         });
 
     }
+
+    function SubmitProductsFeedBack() {
+       
+    alert("Dd");
+        }
     //  debugger
 
     console.log("products Fatch request ",products);
@@ -271,7 +372,13 @@ export default function ProductDetail() {
     <p class="para">
       What are the main reasons for your rating?
     </p>
-    <textarea name="" id=""></textarea>
+    <textarea     
+       type="text"
+       name="productfeedback"
+       className="form-control form-control-lg"
+       value={pass2}
+       onChange={(e) => handleInputChange(e, "productfeedback")}
+    ></textarea>
   </div>
 
   <div class="agreement">
@@ -286,7 +393,7 @@ export default function ProductDetail() {
   </div>
 
   <div class="buttons">
-    <a href="javascript:alert('Thanks for submiting your feedback')">Submit</a>
+    <a href="javascript:alert('Thanks for submiting your feedback')" onClick={handleSubmit}>Submit</a>
     <a href="You just cancelled your to submit the feedback">Cancel</a>
   </div>
 </form>
