@@ -269,8 +269,8 @@ color: whitesmoke;
     opacity: 0.9;
   }
   .buttons a:nth-child(1) {
-    background: #fe71a4;
-    color: #f8faff;
+    background: #ffffff;
+    color: #000000;
   }
   
   /* -----------Feedback--------- */

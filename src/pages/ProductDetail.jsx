@@ -8,6 +8,12 @@ export default function ProductDetail() {
 
     let [cartItems, setCartItems] = useState([])
     const { id } = useParams();
+    const [userid, setuserId] = useState("");
+    const [userfeedback, setfeedback] = useState("");
+    const [userrating, setrating] = useState("");
+    const [products, setProducts] = useState([]);
+    const [eror, setError] = useState("");
+    const [feedbackDatetime, setfeedbackDatetime] = useState("");
     
     // console.log(id,"ID  test");
 
@@ -17,16 +23,6 @@ export default function ProductDetail() {
   
     const { state } = useLocation(); // <-- access route state
 
-    const { item } = state || {}; // <-- unpack the item from state
-      
-    // console.log(item,"Main item");
-
-
-    
- 
-
-    const [products, setProducts] = useState([]);
-    const [productsId, setProductsId] = useState({});
     
     useEffect(() => {
       
@@ -47,46 +43,55 @@ export default function ProductDetail() {
     
 
     const handleInputChange = (e, type) => {
-      
+       
         switch(type){
          
-            case "user":
+            
+            case "productfeedback":
                 setError("");
-                setUser(e.target.value);
-                if(e.target.value === ""){
-                  
-                    setError("Username has left blank!");
-                }
-                break;
-            case "user_email":
-                setError("");
-                setEmail(e.target.value);
+                setfeedback(e.target.value);
                 if(e.target.value === ""){
                     setError("Email has left blank!");
                 }
                 break;
            
-            case "pass2":
-                setError("");
-                setPass2(e.target.value);
-                if(e.target.value === ""){
-                    setError("Confirm password has left blank!");
-                }
-                else if(e.target.value !== pass1){
-                    setError("Confirm password does not match!")
-                }
-                break;
             default:
         }
     }
 
-    function handleSubmit(){
-        setSpinner(true);
+//    function getCurrentDate(separator=''){
+
+//         let newDate = new Date()
+//         let date = newDate.getDate();
+//         let month = newDate.getMonth() + 1;
+//         let year = newDate.getFullYear();
         
-        if(user !== "" && user_email !== "" && pass1 !== "" && pass2 !== ""){
+//         return `${year}${separator}${month<10?`0${month}`:`${month}`}${separator}${date}`
+//         }
+   
+
+      
+    function handleSubmit(){
+
+
+        let newDate = new Date();
+
+        let date = newDate.getDate();
+        let month = newDate.getMonth();
+        let getCurrentDateandTime = month.toLocaleString() + Date().toLocaleString();
+
+        setuserId("1");
+        setrating("4");
+        setfeedbackDatetime(getCurrentDateandTime);
+         
+        console.log("date and time ....",getCurrentDateandTime );
+         
+        // setSpinner(true);
+        // setfeedbackDatetime(); 
+        if(userfeedback !== "" && userrating !== "" ){
+            //   alert("handleSubmit");
               
-              
-              var url = "http://localhost/backend/mailer/registration.php";
+              var url = "http://localhost/backend/insertfeedback.php";
             
        
               var headers = {
@@ -94,13 +99,13 @@ export default function ProductDetail() {
                   "Content-Type": "application/json"
               };
               var Data = {
-                  user: user,
-                  email: user_email,
-                  pass: pass2,
-                  roleid: user_role
+                  userid: userid,
+                  userfeedback: userfeedback,
+                  userrating: userrating,
+                  feedbackDatetime: feedbackDatetime
               }
               
-              console.log('login data',Data);
+              console.log(' Feedback Data',Data);
       
   
               fetch(url, {
@@ -110,18 +115,18 @@ export default function ProductDetail() {
               })
               // .then((response) => response.json())
               .then((response) => {
-                  setSpinner(false);
-                  alert("Registered Successfully");
-                  navigate("/login");
+                //   setSpinner(false);
+                //   alert("Feedback Successfully");
+                //   navigate("/login");
                   // debugger
   
-                  console.log("response: ", response);
+                  console.log("Response Latest: ", response);
                   // setMsg(response[0].result);
               }).catch((err) =>{
-                setSpinner(false);
+                // setSpinner(false);
                 alert("Not Insert HS");
               //   debugger
-              setSpinner(false);
+            //   setSpinner(false);
                   setError(err);
                   console.log(err);
               });
@@ -129,10 +134,10 @@ export default function ProductDetail() {
   
             
               
-              setUser("");
-              setEmail("");
-              setPass1("");
-              setPass2("");
+              setuserId("");
+              setfeedback("");
+              setrating("");
+              setfeedbackDatetime("");
   
               // sendEmailComfirm();
   
@@ -155,7 +160,6 @@ export default function ProductDetail() {
         .catch((err) => {
           console.log(err);
         });
-
     }
 
     function SubmitProductsFeedBack() {
@@ -164,8 +168,8 @@ export default function ProductDetail() {
         }
     //  debugger
 
-    console.log("products Fatch request ",products);
-    let ss = products.find(x=>x.id==4);
+    console.log("Products Fatch ",products);
+    let selectedProduct = products.find(x=>x.id== id);
     
     // ?.map(sn => (
     
@@ -173,50 +177,9 @@ export default function ProductDetail() {
     // ));
     
     // console.log("Product 1w1 ",ss);
-    console.log("Testing Products ",ss);
+    console.log("Testing Products ",selectedProduct);
 
-    // setProductsId(ss);
 
-    // for (let i = 0; i < products.length; i++) {
-    //     let productsObj = products[i];
-    //     // debugger
-        
-    //     //console.log('testing',products[index][i]);
-    //     //  console.log("object",obj.id );
-    //     console.log("Yes, obj",productsObj);
-    //     console.log("Id condition obj",productsObj.id, id);
-    //     if(productsObj.id == id  ) {
-    //         // alert("dd");
-    //         console.log("Id condition obj",productsObj.id);
-    //         setProductsId(productsObj);
-    //     }
-    // }
-    // console.log(clear);
-    // console.log("ff",products[0].map(item => console.log(item.id)));
- 
-
-        // for (i=0 ; i<products.length;i++)
-        // {
-        //     console.log("Id Product",products[i]);
-        // }
-                
-    // products[0].map(d) =>  {console.log(d.id)}
-    // const ids = products.data.map(item => item.map(obj => obj.id));
-
-    // console.log(ids);
-
-    // console.log("products id ", products[0]);
-    
-    // const addProduct = (product) => {
-    //     const productExist = cartItems.find(item => item.id === product.id)
-    //     if (productExist) {
-    //        setCartItems(cartItems.map(item => item.id === product.id?
-    //            {...productExist, quantity: productExist.quantity + 1}: item));
-    //     } else {
-    //        setCartItems([...cartItems, {...product, quantity: 1}])
-    //     }
-    //     }
-     
 
   return (
     <>
@@ -236,14 +199,65 @@ export default function ProductDetail() {
     })
 } */
 }
-    
 
-                    <h1>Testing  {ss.id}</h1>
-                    <h1>Testing  {ss.pname}</h1>
-                    <h1>Testing  {ss.pmname}</h1>
-                    <h1>Testing  {ss.pmodel}</h1>
+
+{/* -----------------testing------------- */}
+
+<form class="container">
+  <h1 class="heading">Give feedback</h1>
+  <p class="para">What do you think of the issue with this pr?</p>
+
+  <div class="feedback-level">
+    <div class="level">
+      <i class="lar la-sad-tear"></i>
+    </div>
+    <div class="level">
+      <i class="las la-frown"></i>
+    </div>
+    <div class="level">
+      <i class="lar la-meh"></i>
+    </div>
+    <div class="level">
+      <i class="lar la-smile"></i>
+    </div>
+    <div class="level">
+      <i class="lar la-grin"></i>
+    </div>
+  </div>
+
+  <div class="feedback-msg">
+    <p class="para">
+      What are the main reasons for your rating?
+    </p>
+    {userfeedback}
+    <textarea     
+       type="text"
+       name="productfeedback"
+       className="form-control form-control-lg"
+    value={userfeedback}
+       onChange={(e) => handleInputChange(e, "productfeedback")}
+    ></textarea>
+  </div>
+
+  <div class="agreement">
+    <div class="checkbox">
+      <input type="checkbox" name="" id="" />
+      <label for="">I may be contacted about this feedback <a href="#">Privacy Policy</a>.</label>
+    </div>
+    <div class="checkbox">
+      <input type="checkbox" name="" id="" />
+      <label for="">I'd like to help improve by joining the <a href="#">Reasearch Group</a>.</label>
+    </div>
+  </div>
+
+  <div class="buttons">
+    <a href="javascript:alert('Thanks for submiting your feedback')" onClick={handleSubmit}>Submit</a>
+    <a href="You just cancelled your to submit the feedback">Cancel</a>
+  </div>
+</form>
+{/* -----------------testing------------- */}
+
     
-           
 {/* 
             {products.find(x=>x.id==4).map((x)=>
          {
@@ -257,6 +271,8 @@ export default function ProductDetail() {
 
             <div class="col-md-5">
                 <div class="main-img">
+                {/* <img class="img-fluid" src={`http://localhost/backend/upload/${selectedProduct.pimg}`} alt="ProductS" /> */}
+                    
                     <img class="img-fluid" src="https://placehold.co/600x400" alt="ProductS" />
                     <div class="row my-3 previews">
                         <div class="col-md-3">
@@ -274,12 +290,12 @@ export default function ProductDetail() {
                     </div>
                 </div>
             </div>
-            
+            {selectedProduct? 
             <div class="col-md-7">
                 <div class="main-description px-2">
                    
                     <div class="category text-bold">
-                        Category: Women
+                        Category:  {selectedProduct.pmname}
                     </div>
                    
                     {/* <h1>{productId}</h1>  */}
@@ -288,14 +304,14 @@ export default function ProductDetail() {
                     <pre>params: {}</pre>
 
                     <div class="product-title text-bold my-3">
-                        Black dress for Women
+                    {selectedProduct.pname}
                     </div>
 
 
                     <div class="price-area my-4">
-                        <p class="old-price mb-1"><del>$100</del> <span class="old-price-discount text-danger">(20% off)</span></p>
-                        <p class="new-price text-bold mb-1">$80</p>
-                        <p class="text-secondary mb-1">(Additional tax may apply on checkout)</p>
+                        <p class="old-price mb-1"><del>{selectedProduct.pmodel}</del> <span class="old-price-discount text-danger">(20% off)</span></p>
+                        <p class="new-price text-bold mb-1">{selectedProduct.pmodel}</p>
+                        <p class="text-secondary mb-1">(Additional tax may apply on checkout) </p>
 
                     </div>
 
@@ -342,61 +358,11 @@ export default function ProductDetail() {
                 </div>
                 
             </div>
-
+            :""}
         </div>
     </div>
 
-    <form class="container">
-  <h1 class="heading">Give feedback</h1>
-  <p class="para">What do you think of the issue with this pr?</p>
 
-  <div class="feedback-level">
-    <div class="level">
-      <i class="lar la-sad-tear"></i>
-    </div>
-    <div class="level">
-      <i class="las la-frown"></i>
-    </div>
-    <div class="level">
-      <i class="lar la-meh"></i>
-    </div>
-    <div class="level">
-      <i class="lar la-smile"></i>
-    </div>
-    <div class="level">
-      <i class="lar la-grin"></i>
-    </div>
-  </div>
-
-  <div class="feedback-msg">
-    <p class="para">
-      What are the main reasons for your rating?
-    </p>
-    <textarea     
-       type="text"
-       name="productfeedback"
-       className="form-control form-control-lg"
-       value={pass2}
-       onChange={(e) => handleInputChange(e, "productfeedback")}
-    ></textarea>
-  </div>
-
-  <div class="agreement">
-    <div class="checkbox">
-      <input type="checkbox" name="" id="" />
-      <label for="">I may be contacted about this feedback <a href="#">Privacy Policy</a>.</label>
-    </div>
-    <div class="checkbox">
-      <input type="checkbox" name="" id="" />
-      <label for="">I'd like to help improve by joining the <a href="#">Reasearch Group</a>.</label>
-    </div>
-  </div>
-
-  <div class="buttons">
-    <a href="javascript:alert('Thanks for submiting your feedback')" onClick={handleSubmit}>Submit</a>
-    <a href="You just cancelled your to submit the feedback">Cancel</a>
-  </div>
-</form>
 
     <div class="container similar-products my-4">
         {/* <hr> */}

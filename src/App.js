@@ -212,7 +212,8 @@ console.log("Login main local storage ",Username);
 
     <Router>
  
-      <ul className="Navbar-link bg-primary d-flex">
+      <ul className="Navbar-link  d-flex">
+      {/* <ul className="Navbar-link bg-primary d-flex"> */}
          
          <li>
            <Link to="/registration" className="fw-bolder" >Registration</Link>
