@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useEffect } from 'react';
 import axios from "axios";
 import { useParams, useLocation } from "react-router-dom";
+import Rating from '../components/Rating';
 
 export default function ProductDetail() {
 
@@ -34,7 +35,17 @@ export default function ProductDetail() {
         //   // console.log(data[0]);
         //   setProducts(data[0]);          
         // });
-        
+        let newDate = new Date();
+
+        let date = newDate.getDate();
+        let month = newDate.getMonth();
+        let getCurrentDateandTimes = month.toLocaleString() + Date().toLocaleString();
+        setuserId("1");
+        setrating("4");
+        setfeedbackDatetime(getCurrentDateandTimes);
+
+
+        SubmitProductsFeedBack();
 
           
  
@@ -52,6 +63,14 @@ export default function ProductDetail() {
                 setfeedback(e.target.value);
                 if(e.target.value === ""){
                     setError("Email has left blank!");
+                }
+                break;
+
+            case "rate":
+                setError("");
+                setrating(e.target.value);
+                if(e.target.value === ""){
+                    setError("Rating has left blank!");
                 }
                 break;
            
@@ -78,18 +97,18 @@ export default function ProductDetail() {
 
         let date = newDate.getDate();
         let month = newDate.getMonth();
-        let getCurrentDateandTime = month.toLocaleString() + Date().toLocaleString();
+        // let getCurrentDateandTime = month.toLocaleString() + Date().toLocaleString();
 
         setuserId("1");
-        setrating("4");
-        setfeedbackDatetime(getCurrentDateandTime);
+        // setrating("4");
+        // setfeedbackDatetime(getCurrentDateandTime);
          
-        console.log("date and time ....",getCurrentDateandTime );
+        // console.log("date and time ....",getCurrentDateandTime );
          
         // setSpinner(true);
         // setfeedbackDatetime(); 
-        if(userfeedback !== "" && userrating !== "" ){
-            //   alert("handleSubmit");
+        if(userfeedback !== "" ){
+              alert("handleSubmit");
               
               var url = "http://localhost/backend/insertfeedback.php";
             
@@ -164,11 +183,14 @@ export default function ProductDetail() {
 
     function SubmitProductsFeedBack() {
        
-    alert("Dd");
+    alert("SubmitProductsFeedBack");
+    setuserId("1");
+    setrating("4");
+    // setfeedbackDatetime(getCurrentDateandTime);
         }
     //  debugger
 
-    console.log("Products Fatch ",products);
+    // console.log("Products Fatch ",products);
     let selectedProduct = products.find(x=>x.id== id);
     
     // ?.map(sn => (
@@ -177,7 +199,7 @@ export default function ProductDetail() {
     // ));
     
     // console.log("Product 1w1 ",ss);
-    console.log("Testing Products ",selectedProduct);
+    // console.log("Testing Products ",selectedProduct);
 
 
 
@@ -203,6 +225,13 @@ export default function ProductDetail() {
 
 {/* -----------------testing------------- */}
 
+<>
+<div>
+    <h1>1{userid?userid :""}   </h1>
+    <h1>2{userfeedback?userfeedback :""}</h1>
+    <h1>3{userrating?userrating :""}</h1>
+    <h1>4{feedbackDatetime?feedbackDatetime :""}</h1>
+</div></>
 <form class="container">
   <h1 class="heading">Give feedback</h1>
   <p class="para">What do you think of the issue with this pr?</p>
@@ -225,6 +254,20 @@ export default function ProductDetail() {
     </div>
   </div>
 
+<>
+<div class="rate">
+    <input type="radio" id="star5"  onChange={(e) => handleInputChange(e, "rate")} name="rate" value="5" />
+    <label for="star5" title="text">5 stars</label>
+    <input type="radio" id="star4" onChange={(e) => handleInputChange(e, "rate")} name="rate" value="4" />
+    <label for="star4" title="text">4 stars</label>
+    <input type="radio" id="star3" onChange={(e) => handleInputChange(e, "rate")} name="rate" value="3" />
+    <label for="star3" title="text">3 stars</label>
+    <input type="radio" id="star2" onChange={(e) => handleInputChange(e, "rate")} name="rate" value="2" />
+    <label for="star2" title="text">2 stars</label>
+    <input type="radio" id="star1" onChange={(e) => handleInputChange(e, "rate")} name="rate" value="1" />
+    <label for="star1" title="text">1 star</label>
+  </div>
+</>
   <div class="feedback-msg">
     <p class="para">
       What are the main reasons for your rating?
