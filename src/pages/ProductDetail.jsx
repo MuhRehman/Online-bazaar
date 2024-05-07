@@ -11,7 +11,7 @@ export default function ProductDetail() {
     const { id } = useParams();
     const [userid, setuserId] = useState("");
     const [userfeedback, setfeedback] = useState("");
-    const [userrating, setrating] = useState("");
+    const [userratings, setrating] = useState("");
     const [products, setProducts] = useState([]);
     const [eror, setError] = useState("");
     const [feedbackDatetime, setfeedbackDatetime] = useState("");
@@ -120,7 +120,7 @@ export default function ProductDetail() {
               var Data = {
                   userid: userid,
                   userfeedback: userfeedback,
-                  userrating: userrating,
+                  userratings: userratings,
                   feedbackDatetime: feedbackDatetime
               }
               
@@ -229,7 +229,7 @@ export default function ProductDetail() {
 <div>
     <h1>1{userid?userid :""}   </h1>
     <h1>2{userfeedback?userfeedback :""}</h1>
-    <h1>3{userrating?userrating :""}</h1>
+    <h1>3{userratings?userratings :""}</h1>
     <h1>4{feedbackDatetime?feedbackDatetime :""}</h1>
 </div></>
 <form class="container">

@@ -102,6 +102,13 @@ function App() {
           "name": "Passion Fruit",
           "price": 80,
           "qty": 1,
+      },
+      {
+          "id": 6,
+          "image": "http://dummyimage.com/440x620.png/5fa2dd/fffffe",
+          "name": "Passion Fruit",
+          "price": 80,
+          "qty": 1,
       }
   ]
 
